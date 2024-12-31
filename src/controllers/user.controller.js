@@ -70,11 +70,7 @@ const loginUser = asyncHandler(async(req, res)=>{
         throw new apiError(404, "User does not exists")
     }
 
-    // console.log(password)
-    // console.log(user.password)
-
     const isPasswordValid = await user.isPasswordCorrect(password)
-    // console.log(isPasswordValid)
 
     if(!isPasswordValid){
         throw new apiError(404, "Invalid user credentials")
@@ -109,7 +105,100 @@ const loginUser = asyncHandler(async(req, res)=>{
 
 })
 
+const logoutUser = asyncHandler(async(req, res)=>{
+    const loggedOutUser = await User.findByIdAndUpdate(
+        req.user._id,
+        {
+            $unset: {
+                refreshToken: 1,
+            },
+        },
+        {
+            new: true,
+        }
+    ).select("-password")
+
+    const option = {
+        httpOnly: true,
+        secure: true,
+    }
+
+    return res
+    .status(200)
+    .clearCookie("accessToken", option)
+    .clearCookie("refreshToken", option)
+    .json(
+        new apiResponse(200, loggedOutUser, "User logged out successfully")
+    )
+})
+
+const getCurrentUser = asyncHandler(async(req, res)=>{
+    return res
+    .status(200)
+    .json(
+        new apiResponse(200, req.user, "current user fetched successfully")
+    )
+})
+
+const changePassword = asyncHandler(async(req, res)=>{
+    const {oldPassword, newPassword} = req.body
+
+    if(!(oldPassword || newPassword) || (oldPassword.trim() || newPassword.trim()) === ""){
+        throw new apiError(400, "old password and new password is required")
+    }
+
+    const user = await User.findById(req.user._id)
+
+    if(!user){
+        throw new apiError(404, "User does not exists")
+    }
+
+    const isPasswordValid = user.isPasswordCorrect(oldPassword)
+
+    if(!isPasswordValid){
+        throw new apiError(404, "Invalid user credentials")
+    }
+
+    user.password = newPassword;
+    await user.save({validateBeforeSave: false})
+
+    return res
+    .status(200)
+    .json(
+        new apiResponse(200, {}, "Password change successfully")
+    )
+})
+
+const updateAccountDetails = asyncHandler(async(req, res)=>{
+    const {newEmail, newUsername} = req.body
+
+    if(!(newEmail || newUsername) || (newEmail.trim() || newUsername.trim()) === ""){
+        throw new apiError(400, "new email and username are required")
+    }
+
+    const user = await User.findByIdAndUpdate(
+        req.user._id,
+        {
+            $set: {
+                email: newEmail,
+                username: newUsername
+            }
+        },
+        {new: true}
+    ).select("-password -refreshToken")
+
+    return res
+    .status(200)
+    .json(
+        new apiResponse(200, user, "User Account details updated successfully")
+    )
+})
+
 export {
     registerUser,
-    loginUser
+    loginUser,
+    logoutUser,
+    getCurrentUser,
+    changePassword,
+    updateAccountDetails
 }
