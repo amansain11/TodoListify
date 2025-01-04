@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { addTodo } from "../controllers/todo.controller.js";
+import { addTodo, deleteTodo, getAllTodos, toggleCompletion, updateTodo } from "../controllers/todo.controller.js";
 import { verifyJwt } from "../middlewares/auth.middleware.js";
 
 const router = Router()
@@ -7,5 +7,8 @@ const router = Router()
 router.use(verifyJwt)
 
 router.route("/add-todo").post(addTodo)
+router.route("/update-todo/:todoId").patch(updateTodo)
+router.route("/delete-todo/:todoId").delete(deleteTodo)
+router.route("/toggle-completion/:todoId").patch(toggleCompletion)
 
 export default router;
