@@ -3,6 +3,7 @@ import apiError from "../utils/apiError.js";
 import apiResponse from "../utils/apiResponse.js";
 import {Todo} from "../models/todos.model.js";
 import mongoose from "mongoose";
+import { response } from "express";
 
 const addTodo = asyncHandler(async (req, res)=>{
     const title = req.body.title
@@ -134,9 +135,98 @@ const toggleCompletion = asyncHandler(async (req, res)=>{
     }
 })
 
+const getAllTodos = asyncHandler(async (req, res)=>{
+    const {page = 1, limit = 10} = req.query
+
+    if(page <= 0 || limit <= 0){
+        throw new apiError(400, "Page and limit must be positive numbers")
+    }
+
+    const result = await Todo.aggregate([
+        {
+            $match: {
+                owner: new mongoose.Types.ObjectId(`${req.user._id}`)
+            }
+        },
+        { $skip: (page - 1) * limit },
+        { $limit: parseInt(limit) }
+    ])
+
+    if(!result || result.length === 0){
+        throw new apiError(404, "Todos not found")
+    }
+
+    return res
+    .status(200)
+    .json(
+        new apiResponse(200, result, "Todos fetched successfully")
+    )
+}) 
+
+const getPendingTodos = asyncHandler(async (req, res)=>{
+    const {page = 1, limit = 10} = req.query
+
+    if(page <= 0 || limit <= 0){
+        throw new apiError(400, "Page and limit must be positive numbers")
+    }
+
+    const result = await Todo.aggregate([
+        {
+            $match: {
+                owner: new mongoose.Types.ObjectId(`${req.user._id}`),
+                complete: false
+            }
+        },
+        { $skip: (page - 1) * limit },
+        { $limit: parseInt(limit) }
+    ])
+
+    if(!result || result.length === 0){
+        throw new apiError(404, "Todos not found")
+    }
+
+    return res
+    .status(200)
+    .json(
+        new apiResponse(200, result, "Pending Todos fetched successfully")
+    )
+})
+
+const getCompletedTodos = asyncHandler(async (req, res)=>{
+    const {page = 1, limit = 10} = req.query
+
+    if(page <= 0 || limit <= 0){
+        throw new apiError(400, "Page and limit must be positive numbers")
+    }
+
+    const result = await Todo.aggregate([
+        {
+            $match: {
+                owner: new mongoose.Types.ObjectId(`${req.user._id}`),
+                complete: true
+            }
+        },
+        { $skip: (page - 1) * limit },
+        { $limit: parseInt(limit) }
+    ])
+
+    if(!result || result.length === 0){
+        throw new apiError(404, "Todos not found")
+    }
+
+    return res
+    .status(200)
+    .json(
+        new apiResponse(200, result, "Completed Todos fetched successfully")
+    )
+})
+
 export {
     addTodo,
     updateTodo,
     deleteTodo,
     toggleCompletion,
+    getAllTodos,
+    getPendingTodos,
+    getCompletedTodos,
 }
