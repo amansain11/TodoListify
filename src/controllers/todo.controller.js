@@ -3,7 +3,6 @@ import apiError from "../utils/apiError.js";
 import apiResponse from "../utils/apiResponse.js";
 import {Todo} from "../models/todos.model.js";
 import mongoose from "mongoose";
-import { response } from "express";
 
 const addTodo = asyncHandler(async (req, res)=>{
     const title = req.body.title
