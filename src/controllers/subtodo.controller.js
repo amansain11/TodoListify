@@ -58,6 +58,125 @@ const addSubTodo = asyncHandler(async (req, res)=>{
     )
 })
 
+const updateSubTodo = asyncHandler(async (req, res)=>{
+    const {subtodoId} = req.params
+
+    if(!subtodoId){
+        throw new apiError(400, "SubTodo ID is required")
+    }
+
+    if(!mongoose.Types.ObjectId.isValid(subtodoId)){
+        throw new apiError(400, "Invalid SubTodo ID format")
+    }
+
+    const {content} = req.body
+
+    if(!content || content.trim() === ""){
+        throw new apiError(400, "Content is required")
+    }
+
+    const updatedSubTodo = await SubTodo.findByIdAndUpdate(
+        subtodoId,
+        {
+            $set: {
+                content: content
+            }
+        },
+        {new: true}
+    )
+
+    if(!updatedSubTodo){
+        throw new apiError(404, "SubTodo not found or Error while updating SubTodo")
+    }
+
+    return res
+    .status(200)
+    .json(
+        new apiResponse(200, updatedSubTodo, "SubTodo updated successfully")
+    )
+})
+
+const deleteSubTodo = asyncHandler(async (req, res)=>{
+    const {subtodoId} = req.params
+
+    if(!subtodoId){
+        throw new apiError(400, "SubTodo ID is required")
+    }
+
+    if(!mongoose.Types.ObjectId.isValid(subtodoId)){
+        throw new apiError(400, "Invalid SubTodo ID format")
+    }
+
+    const deletedSubTodo = await SubTodo.findByIdAndDelete(subtodoId)
+
+    if(!deletedSubTodo){
+        throw new apiError(404, "SubTodo not found to delete")
+    }
+
+    const parentTodo = await Todo.updateOne(
+        { _id: deletedSubTodo.parentTodo },
+        {
+            $pull: {
+                subTodos: new mongoose.Types.ObjectId(`${deletedSubTodo._id}`)
+            }
+        }
+    )
+
+    if(!parentTodo){
+        throw new apiError(404, "Parent Todo not found")
+    }
+
+    return res
+    .status(200)
+    .json(
+        new apiResponse(200, deletedSubTodo, "SubTodo deleted successfully")
+    )
+})
+
+const toggleCompletion = asyncHandler(async (req, res)=>{
+    const {subtodoId} = req.params
+
+    if(!subtodoId){
+        throw new apiError(400, "SubTodo ID is required")
+    }
+
+    if(!mongoose.Types.ObjectId.isValid(subtodoId)){
+        throw new apiError(400, "Invalid SubTodo ID format")
+    }
+
+    const subTodo = await SubTodo.findById(subtodoId)
+
+    if(!subTodo){
+        throw new apiError(404, "SubTodo not found")
+    }
+
+    if(!subTodo.complete){
+        subTodo.complete = true
+
+        await subTodo.save()
+
+        return res
+        .status(200)
+        .json(
+            new apiResponse(200, subTodo, "SubTodo marked to complete")
+        )
+    }
+    else{
+        subTodo.complete = false
+
+        await subTodo.save()
+
+        return res
+        .status(200)
+        .json(
+            new apiResponse(200, subTodo, "SubTodo marked to incomplete")
+        )
+    }
+})
+
 export {
     addSubTodo,
+    updateSubTodo,
+    deleteSubTodo,
+    toggleCompletion
 }
