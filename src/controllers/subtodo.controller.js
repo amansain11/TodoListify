@@ -174,9 +174,205 @@ const toggleCompletion = asyncHandler(async (req, res)=>{
     }
 })
 
+const getAllSubTodos = asyncHandler(async (req, res)=>{
+    const {todoId} = req.params
+
+    if(!todoId){
+        throw new apiError(400, "Todo ID is required")
+    }
+
+    if(!mongoose.Types.ObjectId.isValid(todoId)){
+        throw new apiError(400, "Invalid Todo ID format")
+    }
+
+    const {page = 1, limit = 10} = req.query
+
+    if(page <= 0 || limit <= 0){
+        throw new apiError(400, "Page and Limit must be positive numbers")
+    }
+
+    const result = await Todo.aggregate([
+        {
+            $match: {
+                _id: new mongoose.Types.ObjectId(`${todoId}`)
+            }
+        },
+        {
+            $lookup: {
+                from: "subtodos",
+                localField: "subTodos",
+                foreignField: "_id",
+                as: "subTodos",
+                pipeline: [
+                    {$skip: (page - 1) * limit},
+                    {$limit: parseInt(limit)},
+                ]
+            }
+        },
+        {
+            $addFields: {
+                totalSubTodos: {
+                    $size: "$subTodos"
+                }
+            }
+        },
+        {
+            $project: {
+                subTodos: 1,
+                totalSubTodos: 1
+            }
+        }
+    ])
+
+    if(!result || !result.length){
+        throw new apiError(404, "Todo not found")
+    }
+
+    return res
+    .status(200)
+    .json(
+        new apiResponse(200, result[0], "All SubTodos fetched successfully")
+    )
+})
+
+const getPendingSubTodos = asyncHandler(async (req, res)=>{
+    const {todoId} = req.params
+
+    if(!todoId){
+        throw new apiError(400, "Todo ID is required")
+    }
+
+    if(!mongoose.Types.ObjectId.isValid(todoId)){
+        throw new apiError(400, "Invalid Todo ID format")
+    }
+
+    const {page = 1, limit = 10} = req.query
+
+    if(page <= 0 || limit <= 0){
+        throw new apiError(400, "Page and Limit must be positive numbers")
+    }
+
+    const result = await Todo.aggregate([
+        {
+            $match: {
+                _id: new mongoose.Types.ObjectId(`${todoId}`),
+            }
+        },
+        {
+            $lookup: {
+                from: "subtodos",
+                localField: "subTodos",
+                foreignField: "_id",
+                as: "subTodos",
+                pipeline: [
+                    {
+                        $match: {
+                            complete: false
+                        }
+                    },
+                    {$skip: (page - 1) * limit},
+                    {$limit: parseInt(limit)},
+                ]
+            }
+        },
+        {
+            $addFields: {
+                totalSubTodos: {
+                    $size: "$subTodos"
+                }
+            }
+        },
+        {
+            $project: {
+                subTodos: 1,
+                totalSubTodos: 1
+            }
+        }
+    ])
+
+    if(!result || !result.length){
+        throw new apiError(404, "Todo not found")
+    }
+
+    return res
+    .status(200)
+    .json(
+        new apiResponse(200, result[0], "All Pending SubTodos fetched successfully")
+    )
+})
+
+const getCompletedSubTodos = asyncHandler(async (req, res)=>{
+    const {todoId} = req.params
+
+    if(!todoId){
+        throw new apiError(400, "Todo ID is required")
+    }
+
+    if(!mongoose.Types.ObjectId.isValid(todoId)){
+        throw new apiError(400, "Invalid Todo ID format")
+    }
+
+    const {page = 1, limit = 10} = req.query
+
+    if(page <= 0 || limit <= 0){
+        throw new apiError(400, "Page and Limit must be positive numbers")
+    }
+
+    const result = await Todo.aggregate([
+        {
+            $match: {
+                _id: new mongoose.Types.ObjectId(`${todoId}`),
+            }
+        },
+        {
+            $lookup: {
+                from: "subtodos",
+                localField: "subTodos",
+                foreignField: "_id",
+                as: "subTodos",
+                pipeline: [
+                    {
+                        $match: {
+                            complete: true
+                        }
+                    },
+                    {$skip: (page - 1) * limit},
+                    {$limit: parseInt(limit)},
+                ]
+            }
+        },
+        {
+            $addFields: {
+                totalSubTodos: {
+                    $size: "$subTodos"
+                }
+            }
+        },
+        {
+            $project: {
+                subTodos: 1,
+                totalSubTodos: 1
+            }
+        }
+    ])
+
+    if(!result || !result.length){
+        throw new apiError(404, "Todo not found")
+    }
+
+    return res
+    .status(200)
+    .json(
+        new apiResponse(200, result[0], "All Completed SubTodos fetched successfully")
+    )
+})
+
 export {
     addSubTodo,
     updateSubTodo,
     deleteSubTodo,
-    toggleCompletion
+    toggleCompletion,
+    getAllSubTodos,
+    getPendingSubTodos,
+    getCompletedSubTodos
 }

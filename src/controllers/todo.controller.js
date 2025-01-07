@@ -151,18 +151,34 @@ const getAllTodos = asyncHandler(async (req, res)=>{
                 owner: new mongoose.Types.ObjectId(`${req.user._id}`)
             }
         },
-        { $skip: (page - 1) * limit },
-        { $limit: parseInt(limit) }
+        {
+            $facet: {
+                todos: [
+                    { $skip: (page - 1) * limit },
+                    { $limit: parseInt(limit) }
+                ],
+                totalCount: [
+                    { $count: "total" }
+                ]
+            }
+        },
+        {
+            $addFields: {
+                totalCount: {
+                    $first: "$totalCount.total"
+                }
+            }
+        }
     ])
 
-    if(!result || result.length === 0){
+    if(!result || !result.length){
         throw new apiError(404, "Todos not found")
     }
 
     return res
     .status(200)
     .json(
-        new apiResponse(200, result, "Todos fetched successfully")
+        new apiResponse(200, result[0], "Todos fetched successfully")
     )
 }) 
 
@@ -180,11 +196,27 @@ const getPendingTodos = asyncHandler(async (req, res)=>{
                 complete: false
             }
         },
-        { $skip: (page - 1) * limit },
-        { $limit: parseInt(limit) }
+        {
+            $facet: {
+                todos: [
+                    { $skip: (page - 1) * limit },
+                    { $limit: parseInt(limit) }
+                ],
+                totalCount: [
+                    { $count: "total" }
+                ]
+            }
+        },
+        {
+            $addFields: {
+                totalCount: {
+                    $first: "$totalCount.total"
+                }
+            }
+        }
     ])
 
-    if(!result || result.length === 0){
+    if(!result || !result.length){
         throw new apiError(404, "Todos not found")
     }
 
@@ -209,11 +241,27 @@ const getCompletedTodos = asyncHandler(async (req, res)=>{
                 complete: true
             }
         },
-        { $skip: (page - 1) * limit },
-        { $limit: parseInt(limit) }
+        {
+            $facet: {
+                todos: [
+                    { $skip: (page - 1) * limit },
+                    { $limit: parseInt(limit) }
+                ],
+                totalCount: [
+                    { $count: "total" }
+                ]
+            }
+        },
+        {
+            $addFields: {
+                totalCount: {
+                    $first: "$totalCount.total"
+                }
+            }
+        }
     ])
 
-    if(!result || result.length === 0){
+    if(!result || !result.length){
         throw new apiError(404, "Todos not found")
     }
 
