@@ -33,6 +33,13 @@ button{
     color: inherit;
 }
 
+.btn{
+    padding: .5em;
+    border: 1px solid white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
 /* xs */
 /* @media (min-width: 320px){
 
