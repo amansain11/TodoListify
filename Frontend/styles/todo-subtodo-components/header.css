@@ -1,0 +1,144 @@
+header{
+    background-color: #121212;
+    border-bottom: 1px solid #374151;
+}
+
+.desktop-header{
+    display: none;
+    font-size: 18px;
+    font-weight: 500;
+    color: white;
+    letter-spacing: 2px;
+}
+
+.desktop-header a{
+    color: white;
+    text-decoration: none;
+}
+
+.desktop-header .current-page-title-box{
+    padding: 18px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.desktop-header .logo-box{
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-left: 1px solid #374151;
+    border-right: 1px solid #374151;
+    font-size: 20px;
+}
+
+.desktop-header .logout-box{
+    padding: 18px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.desktop-header .logout-box a{
+    color: orangered;
+}
+
+.mobile-header{
+    display: flex;
+}
+
+.content-box{
+    flex: 1;
+    padding: 15px 12px; 
+    font-weight: 500;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    letter-spacing: 1px;
+}
+
+.content-box span{
+    color: white;
+    font-size: 20px;
+}
+
+.content-box a{
+    display: none;
+    text-decoration: none;
+    color: white;
+    font-size: 14px;
+    text-align: center;
+}
+
+.content-box .logout-button{
+    color: orangered;
+}
+
+.hamburger-box{
+    padding: 15px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+
+.hamburger-box svg{
+    cursor: pointer;
+    width: 35px;
+    height: 35px;
+}
+
+/* xs */
+@media (min-width: 320px){
+    .content-box a{
+        font-size: 17px; 
+    }
+}
+
+/* sm */
+@media (min-width: 425px){
+    .content-box a{
+        margin: 0px 16px; 
+    }
+    .content-box a{
+        font-size: 18px; 
+    }
+}
+
+
+/* md */
+@media (min-width: 625px){
+    .content-box a{
+        margin: 0px 46px;
+    } 
+
+    .content-box span{
+        margin: 0 15px;
+    }
+}
+
+/* lg */
+@media (min-width: 724px){
+    .desktop-header{
+        display: flex;
+    }
+    
+    .mobile-header{
+        display: none;
+    }
+}
+
+/* xl */
+/* @media (min-width: 1024px){
+} */
+
+/* 2xl */
+@media (min-width: 1425px){
+    .desktop-header .current-page-title-box{
+        padding: 18px 30px;
+    }
+
+    .desktop-header .logout-box{
+        padding: 18px 30px;
+    }
+}

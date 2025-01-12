@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TodoListify | Todos</title>
+</head>
+
+<body>
+  <header>
+    <div class="desktop-header">
+        <div class="current-page-title-box"><a class="todo-page" href="">Todos</a></div>
+        <div class="logo-box"><span>TodoListify</span></div>
+        <div class="logout-box"><a class="logout-button" href="">Log Out</a></div>
+    </div>
+    <div class="mobile-header">
+        <div class="content-box">
+            <span>TodoListify</span>
+            <a class="todo-page" href="">Todos</a>
+            <a class="subtodo-page" href="">SubTodos</a>
+            <a class="logout-button" href="">Log Out</a>
+        </div>
+        <div class="hamburger-box">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="white" class="size-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+          </svg>
+        </div>
+    </div>
+  </header>
+  <div class="container">
+    <div class="empty-content-box">
+        <div class="empty-icon">empty-svg</div>
+        <div class="empty-text-box">
+            <span class="empty-text-title">No todos found?</span>
+            <p class="empty-text-subtitle">No todo has been added till now. Click the below button to create a new task.</p>
+        </div>
+        <button id="add-new-todo">(plus-svg) Add a new todo</button>
+    </div>
+    <div class="navigation-button-box">
+        <div class="navigation-botton">
+            <a id="all-todos-button" href="">All</a>
+        </div>
+        <div class="navigation-botton">
+            <a id="pending-todos-button" href="">Pending</a>
+        </div>
+        <div class="navigation-botton">
+            <a id="completed-todos-button" href="">completed</a>
+        </div>
+    </div>
+    <div class="todos-box">
+        <div class="add-todo-box">
+            <div class="text-box"><span>Type to add a new todo...</span></div>
+            <div id="icon-box">plus-svg</div>
+        </div>
+        <div class="todo-box">
+            <div class="todo-content-left">
+                <span id="todo-checkbox">checkbox-svg</span>
+                <span class="todo-title"><a id="todo-title" href="">Complete coding challenge</a></span>
+            </div>
+            <div class="todo-content-right">
+                <span id="date">11 Dec 2024</span>
+                <button id="remove">remove-svg</button>
+                <button id="edit">edit-svg</button>
+            </div>
+        </div>
+    </div>
+  </div>
+  <script type="module" src="/src/todo.js"></script>
+</body>
+
+</html>
