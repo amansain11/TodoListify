@@ -1,14 +1,13 @@
-header{
-    background-color: #121212;
-    border-bottom: 1px solid #374151;
-}
-
 .desktop-header{
     display: none;
     font-size: 18px;
     font-weight: 500;
     color: white;
     letter-spacing: 2px;
+    position: fixed;
+    width: 100%;
+    background-color: #121212;
+    border-bottom: 1px solid #374151;
 }
 
 .desktop-header a{
@@ -46,6 +45,10 @@ header{
 
 .mobile-header{
     display: flex;
+    position: fixed;
+    width: 100%;
+    background-color: #121212;
+    border-bottom: 1px solid #374151;
 }
 
 .content-box{
