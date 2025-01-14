@@ -11,7 +11,7 @@
     <header>
       <div class="desktop-header">
         <div class="current-page-title-box">
-          <a class="subtodo-page" href="">SubTodos</a>
+          <span class="subtodo-page">SubTodos</span>
         </div>
         <div class="logo-box"><span>TodoListify</span></div>
         <div class="logout-box">
@@ -20,10 +20,12 @@
       </div>
       <div class="mobile-header">
         <div class="content-box">
-          <span>TodoListify</span>
-          <a class="todo-page" href="">Todos</a>
-          <a class="subtodo-page" href="">SubTodos</a>
-          <a class="logout-button" href="">Log Out</a>
+          <span id="content-box-title">TodoListify</span>
+          <div id="content-box-items">
+            <a class="todo-page" href="">Todos</a>
+            <a class="subtodo-page underline" href="">SubTodos</a>
+            <a class="logout-button" href="">Log Out</a>
+          </div>
         </div>
         <div class="hamburger-box">
           <svg
