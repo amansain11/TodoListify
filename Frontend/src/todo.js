@@ -5,5 +5,7 @@ import '../styles/todo-subtodo-components/empty-content-box.css';
 import '../styles/todo-subtodo-components/todo-container.css';
 
 import hamburger from './utils/hamburger.js';
+import checkbox from './utils/checkbox.js';
 
 hamburger()
+checkbox()

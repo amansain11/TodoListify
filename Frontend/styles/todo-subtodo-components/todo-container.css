@@ -74,6 +74,14 @@
     align-items: center;
 }
 
+.add-todo-box #icon-box:hover{
+    background-color: #4ade80;
+}
+
+.add-todo-box #icon-box:active{
+    background-color: #16a34a;
+}
+
 .add-todo-box #icon-box svg{
     width: 32px;
     height: 32px;
@@ -111,8 +119,11 @@
     width: 20px;
     height: 20px;
     border: 1px solid white;
-    background-color: #22c55e;
     cursor: pointer;
+}
+
+.marked-checked{
+    background-color: #22c55e;
 }
 
 .todo-content-right{
@@ -132,6 +143,14 @@
     padding: 5px;
 }
 
+.todo-content-right #remove:hover{
+    background-color: #f87171;
+}
+
+.todo-content-right #remove:active{
+    background-color: #dc2626;
+}
+
 .todo-content-right #remove svg{
     width: 20px;
 }
@@ -139,6 +158,14 @@
 .todo-content-right #edit{
     background-color: #3b82f6;
     padding: 5px;
+}
+
+.todo-content-right #edit:hover{
+    background-color: #60a5fa;
+}
+
+.todo-content-right #edit:active{
+    background-color: #2563eb;
 }
 
 .todo-content-right #edit svg{
