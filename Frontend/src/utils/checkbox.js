@@ -1,7 +1,7 @@
 const checkbox = ()=>{
     let todosBox = document.getElementsByClassName('todos-box')[0]
     todosBox.addEventListener('click',(element)=>{
-        if(element.target.tagName === 'svg'){
+        if(element.target.tagName === 'svg' && element.target.parentElement.attributes.id.nodeValue === 'todo-checkbox'){
             if(!element.target.classList.contains('marked-checked')){
                 element.target.classList.add('marked-checked')
                 element.target.parentElement.nextElementSibling.firstElementChild.style.color = "#898989"
@@ -13,7 +13,7 @@ const checkbox = ()=>{
                 element.target.parentElement.nextElementSibling.firstElementChild.style.textDecoration = "none"
             }
         }
-        else if(element.target.tagName === 'path'){
+        else if(element.target.tagName === 'path' && element.target.parentElement.parentElement.attributes.id.nodeValue === 'todo-checkbox'){
             if(!element.target.parentElement.classList.contains('marked-checked')){
                 element.target.parentElement.classList.add('marked-checked')
                 element.target.parentElement.parentElement.nextElementSibling.firstElementChild.style.color = "#898989"
