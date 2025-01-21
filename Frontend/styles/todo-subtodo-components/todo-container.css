@@ -5,6 +5,7 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-start; /*must be change to center when to show empty container*/
+    justify-content: center;
     gap: 20px;
 }
 
@@ -14,13 +15,13 @@
 }
 
 .empty-content-box{
-    display: none;
+    /* display: none; */
 }
 
 
 .navigation-button-box{
-    /* display: none; */
-    display: flex;
+    display: none;
+    /* display: flex; */
     align-items: center;
     gap: 12px;
 }
@@ -37,8 +38,8 @@
 
 
 .todos-box{
-    /* display: none; */
-    display: flex;
+    display: none;
+    /* display: flex; */
     flex-direction: column;
     align-items: center;
 }
