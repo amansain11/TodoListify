@@ -32,15 +32,24 @@
     font-size: 20px;
 }
 
-.desktop-header .logout-box{
-    padding: 18px 20px;
+.desktop-header .desktop-user-profile{
+    padding: 18px 13px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.desktop-header .logout-box a{
+.desktop-header .desktop-user-profile a{
     color: orangered;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    justify-content: center;
+}
+
+.desktop-user-profile a svg{
+    width: 25px;
+    height: 25px;
 }
 
 .mobile-header{
@@ -101,16 +110,33 @@
     text-align: center;
 }
 
+#content-box-items a span{
+    font-size: 15px;
+    text-align: center;
+}
+
 .underline{
     border-bottom: 1px solid white;
 }
 
-#content-box-items .logout-button{
+#content-box-items .mobile-user-profile a{
+    color: orangered;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.mobile-user-profile a svg{
+    width: 22px;
+    height: 22px;
+}
+
+.mobile-user-profile a span{
     color: orangered;
 }
 
 .hamburger-box{
-    padding: 15px;
+    padding: 12px 4px;
     display: flex;
     justify-content: start;
     align-items: center;
@@ -133,6 +159,10 @@
 @media (min-width: 320px){
     #content-box-items a{
         font-size: 17px; 
+        gap: 2px;
+    }
+    #content-box-items a span{
+        font-size: 17px; 
     }
 }
 
@@ -141,6 +171,12 @@
     #content-box-items a{
         margin: 0px 16px; 
         font-size: 18px; 
+    }
+    #content-box-items a span{
+        font-size: 18px; 
+    }
+    .hamburger-box{
+        padding: 15px;
     }
 }
 
@@ -172,7 +208,7 @@
         padding: 18px 30px;
     }
 
-    .desktop-header .logout-box{
+    .desktop-header .desktop-user-profile{
         padding: 18px 30px;
     }
 }

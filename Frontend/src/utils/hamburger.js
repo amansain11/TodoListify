@@ -4,7 +4,6 @@ const hamburger = ()=>{
     let content_box_items = document.getElementById('content-box-items')
     hamburger.addEventListener('click', (element)=>{
         if(element.target.tagName === 'svg' || element.target.tagName === 'path'){
-            console.log("svg hamberger clicked")
             if(!hamburger.firstElementChild.classList.contains('active-hamburger')){
                 hamburger.firstElementChild.classList.add('active-hamburger')
                 content_box_items.classList.remove('move-right')

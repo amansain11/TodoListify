@@ -17,7 +17,7 @@ const logout = ()=>{
                 .then(data => {
                     if(data.success){
                         console.log(data)
-                        window.location.href = '/index.html';
+                        window.location.href = '/login.html';
                     }
                     else{
                         console.log('Logout failed', data.message)

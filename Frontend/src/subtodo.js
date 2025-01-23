@@ -6,8 +6,10 @@ import '../styles/todo-subtodo-components/todo-container.css';
 
 import hamburger from './utils/hamburger.js';
 import checkbox from './utils/checkbox.js';
-import logout from './logout.js';
+import toggleBtn from './utils/toggle-user-profile-button.js';
+// import logout from './utils/logout.js';
 
 hamburger()
 checkbox()
-logout()
+toggleBtn()
+// logout()
