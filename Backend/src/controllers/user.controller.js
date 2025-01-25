@@ -4,6 +4,22 @@ import apiResponse from "../utils/apiResponse.js";
 import {User} from "../models/users.model.js";
 import jwt from "jsonwebtoken";
 
+const parseExpiry = (expiry)=>{
+    const match = expiry.match(/^(\d+)([smhd]?)$/); // match number + time unit(s, m, h, d)
+    if(!match) return 0;
+
+    const value = parseInt(match[1], 10);
+    const unit = match[2];
+
+    switch (unit) {
+        case 's': return value * 1000; // seconds to milliseconds
+        case 'm': return value * 60 * 1000; // minutes to milliseconds
+        case 'h': return value * 60 * 60 * 1000; // hours to milliseconds
+        case 'd': return value * 24 * 60 * 60 * 1000; // days to milliseconds
+        default: return value; 
+    }
+}
+
 const generateAccessAndRefreshToken = async (userId) =>{
     try {
         const user = await User.findById(userId);
@@ -85,14 +101,16 @@ const loginUser = asyncHandler(async(req, res)=>{
     const option = {
         httpOnly: true,
         secure: true,
-        maxAge: 7 * 24 * 60 * 60 * 1000,
         sameSite: 'Strict' 
     }
 
+    const accessTokenMaxAge = parseExpiry(process.env.ACCESS_TOKEN_EXPIRY);
+    const refreshTokenMaxAge = parseExpiry(process.env.REFRESH_TOKEN_EXPIRY);
+
     return res
     .status(200)
-    .cookie("accessToken", accessToken, option)
-    .cookie("refreshToken", refreshToken, option)
+    .cookie("accessToken", accessToken, {...option, maxAge: accessTokenMaxAge})
+    .cookie("refreshToken", refreshToken, {...option, maxAge: refreshTokenMaxAge})
     .json(
         new apiResponse(
             200,
@@ -196,11 +214,30 @@ const updateAccountDetails = asyncHandler(async(req, res)=>{
     )
 })
 
+const checkAccessTokenExpiry = asyncHandler(async(req, res)=>{
+    const accessToken = req.cookies.accessToken || req.body.accessToken
+
+    if(!accessToken){
+        return res
+        .status(401)
+        .json(
+            new apiResponse(401, {}, "Access Token expired")
+        )
+    }
+    else{
+        return res
+        .status(200)
+        .json(
+            new apiResponse(200, {}, "Access Token is not expired")
+        )
+    }
+})
+
 const refreshAccessToken = asyncHandler(async(req, res)=>{
     const incomingRefreshToken = req.cookies.refreshToken || req.body.refreshToken;
 
     if(!incomingRefreshToken){
-        throw new apiError(401, "unathorized request")
+        throw new apiError(401, "unathorized request from refresh access Token")
     }
 
    try {
@@ -208,7 +245,7 @@ const refreshAccessToken = asyncHandler(async(req, res)=>{
          incomingRefreshToken,
          process.env.REFRESH_TOKEN_SECRET
      )
- 
+
      const user = await User.findById(decodedToken?._id)
  
      if(!user){
@@ -223,16 +260,17 @@ const refreshAccessToken = asyncHandler(async(req, res)=>{
  
      const option = {
          httpOnly: true,
-         secure: true
+         secure: true,
+         sameSite: 'Strict' 
      }
 
-     console.log(accessToken)
-     console.log(refreshToken)
+     const accessTokenMaxAge = parseExpiry(process.env.ACCESS_TOKEN_EXPIRY);
+     const refreshTokenExpiry = new Date(decodedToken.exp * 1000);
  
      return res
      .status(200)
-     .cookie("accessToken", accessToken, option)
-     .cookie("refreshToken", refreshToken, option)
+     .cookie("accessToken", accessToken, {...option, maxAge: accessTokenMaxAge})
+     .cookie("refreshToken", refreshToken, {...option, expires: refreshTokenExpiry})
      .json(
          new apiResponse(200, {accessToken, refreshToken}, "Access Token Refreshed successfully")
      )
@@ -248,5 +286,6 @@ export {
     getCurrentUser,
     changePassword,
     updateAccountDetails,
+    checkAccessTokenExpiry,
     refreshAccessToken
 }
