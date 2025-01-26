@@ -10,19 +10,18 @@ const authUser = async()=>{
             credentials: 'include',
         });
 
-        const data = await response.json()
+        const result = await response.json()
 
-        if(data.success){
+        if(result.success){
             console.log("Entered in if with true")
-            return true;
+            return result;
         }
         else{
             console.log("Entered in else with false")
-            return false;
+            return result ;
         }
     } catch (error) {
-        console.error("Error verifying access token", error);
-        return false;
+        throw new Error("Error verifying access token", error)
     }
 }
 

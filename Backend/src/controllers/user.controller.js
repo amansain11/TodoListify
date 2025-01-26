@@ -215,20 +215,46 @@ const updateAccountDetails = asyncHandler(async(req, res)=>{
 })
 
 const checkAccessTokenExpiry = asyncHandler(async(req, res)=>{
-    const accessToken = req.cookies.accessToken || req.body.accessToken
+    let user_data1;
+    let user_data2;
+    try {
+        try {
+            const refreshToken = req.cookies.refreshToken || req.header("X-Refresh-Token");
+            
+            const decoded = jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET)
+        
+            const result = await User.findById(decoded?._id)
+            user_data1 = result;
 
-    if(!accessToken){
-        return res
-        .status(401)
-        .json(
-            new apiResponse(401, {}, "Access Token expired")
-        )
-    }
-    else{
+        } catch (error) {
+            console.log("error in refreshToken verification")
+        }
+    
+        const accessToken = req.cookies.accessToken || req.header("Authorization")?.replace("Bearer ", "");
+    
+        const decoded = jwt.verify(accessToken, process.env.ACCESS_TOKEN_SECRET)
+
+        const result = await User.findById(decoded?._id)
+        user_data2 = result;
+
+        if(!accessToken){
+            return res
+            .status(401)
+            .json(
+                new apiResponse(401, (user_data1 !== undefined ? user_data1 : user_data2) , "Access Token expired")
+            )
+        }
+        
         return res
         .status(200)
         .json(
-            new apiResponse(200, {}, "Access Token is not expired")
+            new apiResponse(200, (user_data1 !== undefined ? user_data1 : user_data2), "Access Token is not expired")
+        )
+    } catch (error) {
+        return res
+        .status(401)
+        .json(
+            new apiResponse(401, (user_data1 !== undefined ? user_data1 : user_data2), "Access Token expired")
         )
     }
 })
