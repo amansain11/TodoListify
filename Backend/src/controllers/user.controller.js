@@ -20,12 +20,11 @@ const parseExpiry = (expiry)=>{
     }
 }
 
-const generateAccessAndRefreshToken = async (userId) =>{
+const generateAccessAndRefreshToken = async (userId, refershTokenOldExpiry) =>{
     try {
         const user = await User.findById(userId);
         const accessToken = user.generateAccessToken();
-        const refreshToken = user.generateRefreshToken();
-    
+        const refreshToken = user.generateRefreshToken(refershTokenOldExpiry);
         user.refreshToken = refreshToken;
         user.save({validateBeforeSave: false});
     
@@ -227,7 +226,7 @@ const checkAccessTokenExpiry = asyncHandler(async(req, res)=>{
             user_data1 = result;
 
         } catch (error) {
-            console.log("error in refreshToken verification")
+            console.log("refresh token expired or not found")
         }
     
         const accessToken = req.cookies.accessToken || req.header("Authorization")?.replace("Bearer ", "");
@@ -282,16 +281,18 @@ const refreshAccessToken = asyncHandler(async(req, res)=>{
          throw new apiError(401, "Refresh token is expired or used")
      }
  
-     const { accessToken, refreshToken } = await generateAccessAndRefreshToken(user._id)
- 
+     const accessTokenMaxAge = parseExpiry(process.env.ACCESS_TOKEN_EXPIRY);
+     const refreshTokenExpiry = new Date(decodedToken.exp * 1000);
+
+    const refreshTokenExpiryInSeconds = Math.floor(refreshTokenExpiry.getTime() / 1000);
+
+     const { accessToken, refreshToken } = await generateAccessAndRefreshToken(user._id, refreshTokenExpiryInSeconds)
+
      const option = {
          httpOnly: true,
          secure: true,
          sameSite: 'Strict' 
      }
-
-     const accessTokenMaxAge = parseExpiry(process.env.ACCESS_TOKEN_EXPIRY);
-     const refreshTokenExpiry = new Date(decodedToken.exp * 1000);
  
      return res
      .status(200)

@@ -50,14 +50,25 @@ userSchema.methods.generateAccessToken = function(){
     )
 }
 
-userSchema.methods.generateRefreshToken = function(){
+userSchema.methods.generateRefreshToken = function(refershTokenOldExpiry){
+
+    const currentTimeInSeconds = Math.floor(Date.now() / 1000);  
+
+    let expiry;
+ 
+    if (refershTokenOldExpiry !== undefined && refershTokenOldExpiry > currentTimeInSeconds) {
+        expiry = refershTokenOldExpiry - currentTimeInSeconds;
+    } else {
+        expiry = process.env.REFRESH_TOKEN_EXPIRY; 
+    }
+
     return jwt.sign(
         {
             _id: this._id,
         },
         process.env.REFRESH_TOKEN_SECRET,
         {
-            expiresIn: process.env.REFRESH_TOKEN_EXPIRY
+            expiresIn: expiry
         }
     )
 }
