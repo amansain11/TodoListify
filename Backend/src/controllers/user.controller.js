@@ -284,7 +284,7 @@ const refreshAccessToken = asyncHandler(async(req, res)=>{
      const accessTokenMaxAge = parseExpiry(process.env.ACCESS_TOKEN_EXPIRY);
      const refreshTokenExpiry = new Date(decodedToken.exp * 1000);
 
-    const refreshTokenExpiryInSeconds = Math.floor(refreshTokenExpiry.getTime() / 1000);
+     const refreshTokenExpiryInSeconds = Math.floor(refreshTokenExpiry.getTime() / 1000);
 
      const { accessToken, refreshToken } = await generateAccessAndRefreshToken(user._id, refreshTokenExpiryInSeconds)
 

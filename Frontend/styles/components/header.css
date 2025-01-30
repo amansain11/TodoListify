@@ -52,6 +52,11 @@
     height: 25px;
 }
 
+.desktop-user-profile #exit-icon{
+    width: 32px;
+    height: 32px;
+}
+
 .mobile-header{
     display: flex;
     position: fixed;

@@ -1,0 +1,176 @@
+.container{
+    color: white;
+    padding: 75px 12px 20px 12px;
+    height: 100vh;
+}
+
+.profile-container{
+    height: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 40px;
+    padding: 30px 15px;
+    border: 1px solid #374151;
+}
+
+.profile-content-box{
+    width: 100%;
+}
+
+.title-bar{
+    display: flex;
+    justify-content: space-between;
+    padding: 0 5px;
+    align-items: center;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.title-bar button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px 8px;
+    font-size: 12px;
+    width: 58px;
+    gap: 2px;
+    font-weight: bold;
+}
+
+.title-bar button span{
+    line-height: unset;
+}
+
+#edit-btn svg{
+    height: max-content;
+    width: 13px;
+}
+
+#edit-btn{
+    font-weight: normal;
+    background-color: #3b82f6;
+}
+
+#edit-btn:hover{
+    background-color: #60a5fa;
+}
+
+#edit-btn:active{
+    background-color: #2563eb;
+}
+
+#save-btn{
+    display: none;
+    color: black;
+}
+
+#save-btn svg{
+    height: max-content;
+    width: 13px;
+}
+
+#save-btn{
+    background-color: #22c55e;
+}
+
+#save-btn:hover{
+    background-color: #4ade80;
+}
+
+#save-btn:active{
+    background-color: #16a34a;
+}
+
+.field-box{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.fields{
+    display: flex;
+    flex-direction: column;
+    padding: 10px 10px;
+    border: 1px solid white;
+}
+
+.fields span{
+    font-size: 13px;
+}
+
+.fields input{
+    background: none;
+    outline: none;
+    border: none;
+    color: white;
+    font-weight: bold;
+    caret-color: orangered;
+}
+
+.newPassword-box{
+    display: none;
+}
+
+/* xs */
+/* @media (min-width: 320px){
+
+} */
+
+/* sm */
+/* @media (min-width: 425px){
+} */
+
+
+/* md */
+@media (min-width: 725px){
+    .container{
+        padding: 100px 40px 30px 40px;
+    }
+
+    .profile-container{
+        padding: 30px 30px;
+        gap: 50px;
+        margin: 0 auto;
+        max-width: 1100px;
+    }
+
+    .title-bar{
+        padding: 0 15px;
+    }
+
+    .title-text{
+        font-size: large;
+    }
+    
+    .field-box{
+        flex-direction: row;
+        border: 1px solid white;
+    }
+
+    .fields{
+        width: 100%;
+        padding: 20px;
+        border: none;
+    }
+
+    .fields span{
+        font-size: 15px;
+    }
+
+    .fields input{
+        font-size: large;
+    }
+}
+
+/* lg */
+/* @media (min-width: 824px){
+} */
+
+/* xl */
+/* @media (min-width: 1024px){
+} */
+
+/* 2xl */
+/* @media (min-width: 1425px){
+} */
