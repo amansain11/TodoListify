@@ -28,7 +28,7 @@
 }
 
 .title-bar button{
-    display: flex;
+    /* display: flex; */
     align-items: center;
     justify-content: center;
     padding: 5px 8px;
@@ -42,43 +42,44 @@
     line-height: unset;
 }
 
-#edit-btn svg{
+.edit-btn svg{
     height: max-content;
     width: 13px;
 }
 
-#edit-btn{
+.edit-btn{
+    display: flex;
     font-weight: normal;
     background-color: #3b82f6;
 }
 
-#edit-btn:hover{
+.edit-btn:hover{
     background-color: #60a5fa;
 }
 
-#edit-btn:active{
+.edit-btn:active{
     background-color: #2563eb;
 }
 
-#save-btn{
+.save-btn{
     display: none;
     color: black;
 }
 
-#save-btn svg{
+.save-btn svg{
     height: max-content;
     width: 13px;
 }
 
-#save-btn{
+.save-btn{
     background-color: #22c55e;
 }
 
-#save-btn:hover{
+.save-btn:hover{
     background-color: #4ade80;
 }
 
-#save-btn:active{
+.save-btn:active{
     background-color: #16a34a;
 }
 
@@ -106,6 +107,12 @@
     color: white;
     font-weight: bold;
     caret-color: orangered;
+}
+
+.fields input::placeholder{
+    color: #64748b;
+    font-weight: normal;
+    font-size: smaller;
 }
 
 .newPassword-box{

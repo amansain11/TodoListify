@@ -57,6 +57,7 @@ const registerUser = asyncHandler(async (req, res)=>{
         {
             email,
             password,
+            passwordLength: password.length,
             username: username.toLowerCase(),
         }
     )
@@ -179,6 +180,7 @@ const changePassword = asyncHandler(async(req, res)=>{
     }
 
     user.password = newPassword;
+    user.passwordLength = newPassword.length
     await user.save({validateBeforeSave: false})
 
     return res

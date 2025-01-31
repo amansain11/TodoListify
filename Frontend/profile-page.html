@@ -68,7 +68,7 @@
         <div class="personal-info-box profile-content-box">
           <div class="title-bar">
             <span class="title-text">Personal Information</span>
-            <button id="edit-btn">
+            <button id="info-edit-btn" class="edit-btn">
               <span>Edit</span>
               <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -86,23 +86,23 @@
                     ></path>
                   </svg>
             </button>
-            <button id="save-btn">save</button>
+            <button id="info-save-btn" class="save-btn">save</button>
           </div>
           <div class="field-box">
             <div class="username-box fields">
               <span>Username</span>
-              <input type="text" id="username" required>
+              <input type="text" id="username" placeholder="Enter new username.." autocomplete="username" required>
             </div>
             <div class="email-box fields">
               <span>Email</span>
-              <input type="email" id="email" required>
+              <input type="email" id="email" placeholder="Enter new email.." autocomplete="email" required>
             </div>
           </div>
         </div>
         <div class="user-credential-box profile-content-box">
           <div class="title-bar">
             <span  class="title-text">User Credentials</span>
-            <button id="edit-btn">
+            <button id="password-edit-btn" class="edit-btn">
               <span>Edit</span>
               <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -120,16 +120,16 @@
               ></path>
             </svg>
             </button>
-            <button id="save-btn">save</button>
+            <button id="password-save-btn" class="save-btn">save</button>
           </div>
           <div class="field-box">
             <div class="oldPassword-box fields">
               <span>Password</span>
-              <input type="password" id="oldPassword" required>
+              <input type="password" id="oldPassword" placeholder="Enter old password.." autocomplete="current-password" required>
             </div>
             <div class="newPassword-box fields">
               <span>New Password</span>
-              <input type="password" id="newPassword" required>
+              <input type="password" id="newPassword" placeholder="Enter new password.." autocomplete="new-password" required>
             </div>
           </div>
         </div>
