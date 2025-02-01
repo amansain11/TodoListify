@@ -7,9 +7,7 @@ import '../styles/components/todo-container.css';
 import hamburger from './utils/hamburger.js';
 import checkbox from './utils/checkbox.js';
 import refreshAccessToken from './utils/refresh-access-token.js';
-// import logout from './utils/logout.js';
 
 hamburger()
 checkbox()
 refreshAccessToken()
-// logout()

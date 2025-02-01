@@ -5,7 +5,6 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-start; /*must be change to center when to show empty container*/
-    justify-content: center;
     gap: 20px;
 }
 
@@ -15,7 +14,11 @@
 }
 
 .empty-content-box{
-    /* display: none; */
+    display: none;
+}
+
+.justify-center{
+    justify-content: center;
 }
 
 
