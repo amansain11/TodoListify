@@ -18,7 +18,7 @@ const logout = ()=>{
             console.log('Logout failed', data.message)
         }
     })
-    .catch(error => console.log("Error: ",error))            
+    .catch(error => console.log("Error while logging out: ",error))            
 }
 
 export default logout;

@@ -57,6 +57,10 @@
     height: 32px;
 }
 
+.icon-fill{
+    fill: orangered;
+}
+
 .mobile-header{
     display: flex;
     position: fixed;

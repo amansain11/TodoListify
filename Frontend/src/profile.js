@@ -5,6 +5,7 @@ import '../styles/components/profile-container.css';
 
 import authUser from './utils/authenticate-user.js';
 import getUserDetails from './utils/getUserDetails.js';
+import logout from './utils/logout.js';
 
 const fetchUserDetails = async ()=>{
     const sessionValid = await authUser()
@@ -157,6 +158,16 @@ const changePassword = ()=>{
     })
 }
 
+const loggingOut = ()=>{
+    const logoutButton = document.getElementById('logout-button');
+
+    logoutButton.addEventListener('click', async (event)=>{
+        event.preventDefault()
+        logout()
+    })
+}
+
 fetchUserDetails()
 updateUserDetails()
 changePassword()
+loggingOut()
