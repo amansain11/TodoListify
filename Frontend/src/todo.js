@@ -10,13 +10,31 @@ import refreshAccessToken from './utils/refresh-access-token.js';
 import getAllTodos from './utils/getAllTodos.js';
 import dateFormater from './utils/dateFormater.js';
 
-const allTodosHandler = async ()=>{
+const togglePaginationButtons = (currentPage, limit, totalCount)=>{
+    const prevBtn = document.getElementById('prev-button');
+    const nextBtn = document.getElementById('next-button');
+
+    const totalPages = Math.ceil(totalCount / limit);
+
+    prevBtn.disabled = currentPage === 1;
+
+    prevBtn.disabled ? prevBtn.style.color = '#962901' : prevBtn.style.color = 'orangered';
+
+    nextBtn.disabled = currentPage === totalPages;
+
+    nextBtn.disabled ? nextBtn.style.color = '#962901' : nextBtn.style.color = 'orangered';
+}
+
+const allTodosHandler = async (currentPage, limit)=>{
     const emptyContentBox = document.getElementsByClassName('empty-content-box')[0];
     const navigationButtonBox = document.getElementsByClassName('navigation-button-box')[0];
     const todosBox = document.getElementsByClassName('todos-box')[0];
+    const todoWrapper = document.getElementById('todo-box-wrapper');
     const container = document.getElementsByClassName('container')[0];
 
-    getAllTodos()
+    todoWrapper.innerHTML = '';
+
+    getAllTodos(currentPage, limit)
     .then(data => {
         if(!data.totalCount <= 0){
             navigationButtonBox.style.display = 'flex';
@@ -69,8 +87,10 @@ const allTodosHandler = async ()=>{
                             </svg>
                         </button>
                     </div>`;
-                todosBox.appendChild(todoBox);
+                todoWrapper.appendChild(todoBox);
             });
+
+            togglePaginationButtons(currentPage, limit, data.totalCount)
         }
         else{
             emptyContentBox.style.display = 'flex';
@@ -80,8 +100,29 @@ const allTodosHandler = async ()=>{
     .catch(error => console.log("Error fetching all todos",error))
 }
 
+const loadTodos = ()=>{
+    let currentPage = 1;
+    const limit = 10;
+
+    const paginationBox = document.getElementsByClassName('pagination-link-box')[0]
+    
+    paginationBox.addEventListener("click", (event)=>{
+        if(event.target.id === 'prev-button' && currentPage > 1){
+            currentPage--;
+        }
+
+        else if(event.target.id === 'next-button'){
+            currentPage++;
+        }
+
+        allTodosHandler(currentPage, limit)
+    })
+
+    allTodosHandler(currentPage, limit)
+}
+
 hamburger();
 checkbox();
 refreshAccessToken();
-allTodosHandler()
+loadTodos()
 

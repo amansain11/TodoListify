@@ -1,6 +1,4 @@
-const getAllTodos = async ()=>{
-    const page = 1;
-    const limit = 10;
+const getAllTodos = async (page, limit)=>{
     const url = `http://localhost:8000/api/v1/todos/get-all-todos?page=${page}&limit=${limit}`;
 
     try {
@@ -15,7 +13,6 @@ const getAllTodos = async ()=>{
         const result = await response.json()
     
         if(result.success){
-            console.log(result.message)
             return result.data;
         }
         else{
