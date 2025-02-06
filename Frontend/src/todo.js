@@ -5,11 +5,25 @@ import '../styles/components/empty-content-box.css';
 import '../styles/components/todo-container.css';
 
 import hamburger from './utils/hamburger.js';
-import checkbox from './utils/checkbox.js';
 import refreshAccessToken from './utils/refresh-access-token.js';
 import getAllTodos from './utils/getAllTodos.js';
 import dateFormater from './utils/dateFormater.js';
 import removeTodo from './utils/removetodo.js';
+import checkbox from './utils/checkbox.js';
+
+const toggleCheckbox = (todoId, isCompleted)=>{
+    const todo = document.getElementById(todoId)
+    if(isCompleted){
+        todo.firstElementChild.firstElementChild.firstElementChild.classList.add('marked-checked')
+        todo.firstElementChild.lastElementChild.firstElementChild.style.color = "#898989"
+        todo.firstElementChild.lastElementChild.firstElementChild.style.textDecoration = "line-through"
+    }
+    else{
+        todo.firstElementChild.firstElementChild.firstElementChild.classList.remove('marked-checked')
+        todo.firstElementChild.lastElementChild.firstElementChild.style.color = "white"
+        todo.firstElementChild.lastElementChild.firstElementChild.style.textDecoration = "none"
+    }
+}
 
 const togglePaginationButtons = (currentPage, limit, totalCount)=>{
     const prevBtn = document.getElementById('prev-button');
@@ -26,7 +40,7 @@ const togglePaginationButtons = (currentPage, limit, totalCount)=>{
     nextBtn.disabled ? nextBtn.style.color = '#962901' : nextBtn.style.color = 'orangered';
 }
 
-const allTodosHandler = async (currentPage, limit)=>{
+const allTodosHandler = (currentPage, limit)=>{
     const emptyContentBox = document.getElementsByClassName('empty-content-box')[0];
     const navigationButtonBox = document.getElementsByClassName('navigation-button-box')[0];
     const todosBox = document.getElementsByClassName('todos-box')[0];
@@ -44,7 +58,7 @@ const allTodosHandler = async (currentPage, limit)=>{
             footer.style.display = 'flex';
             data.todos.forEach(todo => {
                 let todoBox = document.createElement('li')
-        
+
                 todoBox.setAttribute('class', 'todo-box')
                 todoBox.setAttribute('id', todo._id)
                 todoBox.innerHTML = 
@@ -92,8 +106,10 @@ const allTodosHandler = async (currentPage, limit)=>{
                         </button>
                     </div>`;
                 todoWrapper.appendChild(todoBox);
-            });
 
+                toggleCheckbox(todo._id, todo.complete)
+            });
+            
             togglePaginationButtons(currentPage, limit, data.totalCount)
         }
         else{
@@ -214,10 +230,26 @@ const removeTodoHandler = ()=>{
     })  
 }
 
+const checkboxHandler = ()=>{
+    let todosBox = document.getElementsByClassName('todos-box')[0]
+    todosBox.addEventListener('click',async (element)=>{
+        if(element.target.tagName === 'svg' && element.target.parentElement.id === 'todo-checkbox'){
+            const todoId = element.target.parentElement.parentElement.parentElement.id;
+            const result = await checkbox(todoId)
+            toggleCheckbox(todoId, result.data.complete)
+        }
+        else if(element.target.tagName === 'path' && element.target.parentElement.parentElement.id === 'todo-checkbox'){
+            const todoId = element.target.parentElement.parentElement.parentElement.parentElement.id;
+            const result = await checkbox(todoId)
+            toggleCheckbox(todoId, result.data.complete)
+        }
+    })
+}
+
 hamburger();
-checkbox();
 refreshAccessToken();
 loadTodos()
 emptyBoxHandler()
 addTodo()
 removeTodoHandler()
+checkboxHandler();

@@ -1,31 +1,18 @@
-const checkbox = ()=>{
-    let todosBox = document.getElementsByClassName('todos-box')[0]
-    todosBox.addEventListener('click',(element)=>{
-        if(element.target.tagName === 'svg' && element.target.parentElement.attributes.id.nodeValue === 'todo-checkbox'){
-            if(!element.target.classList.contains('marked-checked')){
-                element.target.classList.add('marked-checked')
-                element.target.parentElement.nextElementSibling.firstElementChild.style.color = "#898989"
-                element.target.parentElement.nextElementSibling.firstElementChild.style.textDecoration = "line-through"
-            }
-            else{
-                element.target.classList.remove('marked-checked')
-                element.target.parentElement.nextElementSibling.firstElementChild.style.color = "white"
-                element.target.parentElement.nextElementSibling.firstElementChild.style.textDecoration = "none"
-            }
-        }
-        else if(element.target.tagName === 'path' && element.target.parentElement.parentElement.attributes.id.nodeValue === 'todo-checkbox'){
-            if(!element.target.parentElement.classList.contains('marked-checked')){
-                element.target.parentElement.classList.add('marked-checked')
-                element.target.parentElement.parentElement.nextElementSibling.firstElementChild.style.color = "#898989"
-                element.target.parentElement.parentElement.nextElementSibling.firstElementChild.style.textDecoration = "line-through"
-            }
-            else{
-                element.target.parentElement.classList.remove('marked-checked')
-                element.target.parentElement.parentElement.nextElementSibling.firstElementChild.style.color = "white"
-                element.target.parentElement.parentElement.nextElementSibling.firstElementChild.style.textDecoration = "none"
-            }
-        }
-    })
+const checkbox = async (todoId)=>{
+    const url = `http://localhost:8000/api/v1/todos/toggle-completion/${todoId}`;
+
+    try {
+        const response = await fetch(url, {
+            method: 'PATCH',
+            credentials: 'include'
+        })
+        
+        const result = response.json()
+    
+        return result
+    } catch (error) {
+        console.log(error)
+    }
 }
 
 export default checkbox;

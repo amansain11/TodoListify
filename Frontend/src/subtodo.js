@@ -5,9 +5,9 @@ import '../styles/components/empty-content-box.css';
 import '../styles/components/todo-container.css';
 
 import hamburger from './utils/hamburger.js';
-import checkbox from './utils/checkbox.js';
+// import checkbox from './utils/checkbox.js';
 import refreshAccessToken from './utils/refresh-access-token.js';
 
 hamburger()
-checkbox()
+// checkbox()
 refreshAccessToken()
