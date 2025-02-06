@@ -177,7 +177,7 @@
 .footer-box{
     width: 100%;
     flex: 1;
-    display: flex;
+    display: none;
     justify-content: center;
     align-items: end;
     margin-top: 20px;
@@ -192,7 +192,7 @@
 }
 
 #prev-button, #next-button{
-    color: orangered;
+    color: #962901;
     text-wrap: nowrap;
     font-weight: 500;
     letter-spacing: 1px;

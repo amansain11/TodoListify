@@ -99,9 +99,9 @@
         </div>
       </div>
       <ul class="todos-box">
-        <li class="add-todo-box">
-          <input type="text" id="text-box" placeholder="Type to add a new todo...">
-          <button id="icon-box">
+        <form class="add-todo-box">
+          <input type="text" id="text-box" name="todo" placeholder="Type to add a new todo...">
+          <button id="icon-box" type="submit">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 20 20"
@@ -114,15 +114,15 @@
                 clip-rule="evenodd"></path>
             </svg>
           </button>
-        </li>
+        </form>
         <div id="todo-box-wrapper" style="width: 100%"></div>
       </ul>
       <div class="footer-box">
         <div class="pagination-link-box">
           <div class="pagination-box-ruler"></div>
-          <button id="prev-button">Prev</button>
+          <button id="prev-button" disabled>Prev</button>
           <div class="divider"></div>
-          <button id="next-button">Next</button>
+          <button id="next-button" disabled>Next</button>
           <div class="pagination-box-ruler"></div>
         </div>
       </div>

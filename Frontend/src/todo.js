@@ -9,6 +9,7 @@ import checkbox from './utils/checkbox.js';
 import refreshAccessToken from './utils/refresh-access-token.js';
 import getAllTodos from './utils/getAllTodos.js';
 import dateFormater from './utils/dateFormater.js';
+import removeTodo from './utils/removetodo.js';
 
 const togglePaginationButtons = (currentPage, limit, totalCount)=>{
     const prevBtn = document.getElementById('prev-button');
@@ -31,6 +32,7 @@ const allTodosHandler = async (currentPage, limit)=>{
     const todosBox = document.getElementsByClassName('todos-box')[0];
     const todoWrapper = document.getElementById('todo-box-wrapper');
     const container = document.getElementsByClassName('container')[0];
+    const footer = document.getElementsByClassName('footer-box')[0];
 
     todoWrapper.innerHTML = '';
 
@@ -39,10 +41,12 @@ const allTodosHandler = async (currentPage, limit)=>{
         if(!data.totalCount <= 0){
             navigationButtonBox.style.display = 'flex';
             todosBox.style.display = 'flex';
-
+            footer.style.display = 'flex';
             data.todos.forEach(todo => {
                 let todoBox = document.createElement('li')
+        
                 todoBox.setAttribute('class', 'todo-box')
+                todoBox.setAttribute('id', todo._id)
                 todoBox.innerHTML = 
                         `<div class="todo-content-left">
                         <span id="todo-checkbox">
@@ -93,8 +97,11 @@ const allTodosHandler = async (currentPage, limit)=>{
             togglePaginationButtons(currentPage, limit, data.totalCount)
         }
         else{
+            navigationButtonBox.style.display = 'none';
+            todosBox.style.display = 'none';
             emptyContentBox.style.display = 'flex';
             container.classList.add('justify-center');
+            footer.style.display = 'none';
         }
     })
     .catch(error => console.log("Error fetching all todos",error))
@@ -121,8 +128,96 @@ const loadTodos = ()=>{
     allTodosHandler(currentPage, limit)
 }
 
+const emptyBoxHandler = ()=>{
+    const btn = document.getElementById('add-new-todo');
+    const navigationButtonBox = document.getElementsByClassName('navigation-button-box')[0];
+    const todosBox = document.getElementsByClassName('todos-box')[0];
+    const footer = document.getElementsByClassName('footer-box')[0];
+    const emptyContentBox = document.getElementsByClassName('empty-content-box')[0];
+    const todoInputField = document.getElementById('text-box');
+
+    btn.addEventListener('click',()=>{
+        emptyContentBox.style.display = 'none';
+        navigationButtonBox.style.display = 'flex';
+        todosBox.style.display = 'flex';
+        footer.style.display = 'flex';
+        todoInputField.focus();
+    })
+}
+
+const addTodo = ()=>{
+    const form = document.getElementsByClassName('add-todo-box')[0];
+
+    form.addEventListener('submit', async (event)=>{
+        event.preventDefault();
+
+        const url = 'http://localhost:8000/api/v1/todos/add-todo';
+
+        const formData = new FormData(form)
+
+        const data = new URLSearchParams()
+        data.append('title', formData.get('todo'))
+
+        await fetch(url,{
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            credentials: 'include',
+            body: data.toString()
+        })
+        .then(Response => Response.json())
+        .then(data => {
+            if(data.success){
+                form.reset()
+                loadTodos()
+            }
+            else{
+                console.log("Failed adding todo: ",data.message)
+            }
+        })
+        .catch(error => console.error('Error: ',error))
+    })
+}
+
+const removeTodoHandler = ()=>{
+    const todoList = document.getElementById('todo-box-wrapper')
+
+    todoList.addEventListener('click', async (event)=>{
+        if(event.target.tagName === 'BUTTON' && event.target.id === 'remove'){
+            const result = await removeTodo(event.target.parentElement.parentElement.id)
+            if(result.success){
+                loadTodos()
+            }
+            else{
+                console.log(result.message)
+            }
+        }
+        else if(event.target.tagName === 'svg' && event.target.parentElement.id === 'remove'){
+            const result = await removeTodo(event.target.parentElement.parentElement.parentElement.id)
+            if(result.success){
+                loadTodos()
+            }
+            else{
+                console.log(result.message)
+            }
+        }
+        else if(event.target.tagName === 'path' && event.target.parentElement.parentElement.id === 'remove'){
+            const result = await removeTodo(event.target.parentElement.parentElement.parentElement.parentElement.id)
+            if(result.success){
+                loadTodos()
+            }
+            else{
+                console.log(result.message)
+            }
+        }
+    })  
+}
+
 hamburger();
 checkbox();
 refreshAccessToken();
 loadTodos()
-
+emptyBoxHandler()
+addTodo()
+removeTodoHandler()
