@@ -165,7 +165,7 @@ const getAllTodos = asyncHandler(async (req, res)=>{
         {
             $addFields: {
                 totalCount: {
-                    $first: "$totalCount.total"
+                    $ifNull: [{$first: "$totalCount.total"}, 0]
                 }
             }
         }
@@ -210,7 +210,7 @@ const getPendingTodos = asyncHandler(async (req, res)=>{
         {
             $addFields: {
                 totalCount: {
-                    $first: "$totalCount.total"
+                    $ifNull: [{$first: "$totalCount.total"}, 0]
                 }
             }
         }
@@ -255,7 +255,7 @@ const getCompletedTodos = asyncHandler(async (req, res)=>{
         {
             $addFields: {
                 totalCount: {
-                    $first: "$totalCount.total"
+                    $ifNull: [{$first: "$totalCount.total"}, 0]
                 }
             }
         }
