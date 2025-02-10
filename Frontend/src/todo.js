@@ -109,7 +109,7 @@ const loadTodos = () => {
                                     d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"></path>
                             </svg>
                         </button>
-                        <button id="edit">
+                        <button id="edit" class="edit-btn">
                             <svg
                             xmlns="http://www.w3.org/2000/svg"
                             fill="none"
@@ -124,7 +124,7 @@ const loadTodos = () => {
                                 d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125"></path>
                             </svg>
                         </button>
-                    </div>`;
+                    </div>`;      
           todoWrapper.appendChild(todoBox);
 
           toggleCheckbox(todo._id, todo.complete);
@@ -212,63 +212,87 @@ const removeTodoHandler = () => {
   const todoList = document.getElementById("todo-box-wrapper");
 
   todoList.addEventListener("click", async (event) => {
-    if (event.target.tagName === "BUTTON" && event.target.id === "remove") {
-      const result = await removeTodo(event.target.parentElement.parentElement.id);
+    const removeButton = event.target.closest("#remove")
 
-      if (result.success) {
-        loadTodos();
-      } 
+    if(removeButton){
+      const todoId = removeButton.closest('.todo-box').id;
 
-      else {
-        console.log(result.message);
+      const result = await removeTodo(todoId)
+
+      if(result.success){
+          loadTodos()
       }
-    } 
-    
-    else if (event.target.tagName === "svg" && event.target.parentElement.id === "remove") {
-        const result = await removeTodo(event.target.parentElement.parentElement.parentElement.id);
-
-        if (result.success) {
-            loadTodos();
-        } 
-        
-        else {
-            console.log(result.message);
-        }
-    } 
-    else if (event.target.tagName === "path" && event.target.parentElement.parentElement.id === "remove") {
-      const result = await removeTodo(event.target.parentElement.parentElement.parentElement.parentElement.id);
-
-      if (result.success) {
-        loadTodos();
-      }
-
-       else {
-        console.log(result.message);
+      else{
+        console.log(result.message)
       }
     }
   });
 };
 
 const checkboxHandler = () => {
-  let todosBox = document.getElementsByClassName("todos-box")[0];
-  todosBox.addEventListener("click", async (element) => {
-    if (
-      element.target.tagName === "svg" &&
-      element.target.parentElement.id === "todo-checkbox"
-    ) {
-      const todoId =
-        element.target.parentElement.parentElement.parentElement.id;
-      const result = await checkbox(todoId);
-      toggleCheckbox(todoId, result.data.complete);
-    } else if (
-      element.target.tagName === "path" &&
-      element.target.parentElement.parentElement.id === "todo-checkbox"
-    ) {
-      const todoId =
-        element.target.parentElement.parentElement.parentElement.parentElement
-          .id;
-      const result = await checkbox(todoId);
-      toggleCheckbox(todoId, result.data.complete);
+  const todoList = document.getElementById("todo-box-wrapper");
+
+  todoList.addEventListener("click", async (event) => {
+    const checkboxbtn = event.target.closest('#todo-checkbox')
+
+    if(checkboxbtn){
+      const todoId = checkboxbtn.closest('.todo-box').id;
+
+      const result = await checkbox(todoId)
+
+      toggleCheckbox(todoId, result.data.complete)
+    }
+  });
+};
+
+const editTodoHandler = () => { 
+  const todoList = document.getElementById("todo-box-wrapper");
+
+  todoList.addEventListener("click", async (event) => {
+    const editbtn = event.target.closest('#edit')
+
+    if(editbtn){
+      const todo = editbtn.closest('.todo-box')
+      
+      todo.innerHTML = `<form id="edit-form">
+          <input id="edit-input" type="text" name="todo" placeholder="Type to Edit todo...">
+          <button id="save" class="save-btn" type="submit">
+              save
+          </button>
+        </form>`;
+
+      const todoId = todo.id;
+      const form = todo.firstElementChild;
+
+      form.addEventListener('submit', async(event) => {
+        event.preventDefault()
+
+        const url = `http://localhost:8000/api/v1/todos/update-todo/${todoId}`;
+
+        const formData = new FormData(form)
+
+        const data = new URLSearchParams();
+        data.append("title", formData.get("todo"))
+
+        await fetch(url, {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
+          credentials: "include",
+          body: data.toString()
+        })
+        .then(Response => Response.json())
+        .then(data => {
+          if(data.success){
+            loadTodos()
+          }
+          else{
+            console.log("Failed updating todo: ", data.message)
+          }
+        })
+        .catch(error => console.error("Error: ", error))
+      })
     }
   });
 };
@@ -280,3 +304,4 @@ emptyBoxHandler();
 addTodo();
 removeTodoHandler();
 checkboxHandler();
+editTodoHandler();

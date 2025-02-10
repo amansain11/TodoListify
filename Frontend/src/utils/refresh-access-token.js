@@ -28,6 +28,7 @@ const refreshAccessToken = async ()=>{
         .then(response => {
             if(response.ok){
                 console.log("Access Token is refreshed successfully")
+                location.reload()
             }
             else{
                 console.log("Access Token is not refreshed")

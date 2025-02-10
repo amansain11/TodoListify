@@ -174,6 +174,46 @@
     width: 20px;
 }
 
+#edit-form{
+    left: 0;
+    top: 0;
+    padding: 2.5px 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+#edit-input{
+    color: white;
+    caret-color: white;
+    outline: none;
+    flex: 1;
+    background: none;
+    border: 0;
+}
+
+.save-btn{
+    font-weight: 600;
+    color: #000;
+    font-size: 14px;
+    width: 25px inherit;
+    width: 50px;
+    height: 25px;
+    background: #2ec666;
+}
+
+.save-btn{
+    background-color: #22c55e;
+}
+
+.save-btn:hover{
+    background-color: #4ade80;
+}
+
+.save-btn:active{
+    background-color: #16a34a;
+}
+
 .footer-box{
     width: 100%;
     flex: 1;
