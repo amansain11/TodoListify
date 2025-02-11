@@ -1,0 +1,23 @@
+const getAllPendingTodos = async (page, limit)=>{
+    const url = `http://localhost:8000/api/v1/todos/get-pending-todos?page=${page}&limit=${limit}`;
+
+    try {
+        const response = await fetch(url, {
+            method: "GET",
+            credentials: 'include'
+        })
+    
+        const result = await response.json()
+    
+        if(result.success){
+            return result.data
+        }
+        else{
+            console.log(result.message)
+        }  
+    } catch (error) {
+        throw new Error("Error while fetching all pending todos ", error)
+    }  
+}
+
+export default getAllPendingTodos;

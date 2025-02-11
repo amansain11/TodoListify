@@ -8,11 +8,6 @@
     gap: 20px;
 }
 
-.container a{
-    text-decoration: none;
-    color: white;
-}
-
 .empty-content-box{
     display: none;
 }
@@ -28,16 +23,19 @@
     gap: 12px;
 }
 
-.navigation-botton a{
+.navigation-button{
     border: 1px solid #374151;
     padding: 10px 13px;
     font-size: 13px;
 }
 
-.navigation-botton a:hover{
+.navigation-button:hover{
     background-color: #232323;
 }
 
+#all-todos-button{
+    background: black;
+}
 
 .todos-box{
     display: none;

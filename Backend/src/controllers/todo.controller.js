@@ -223,7 +223,7 @@ const getPendingTodos = asyncHandler(async (req, res)=>{
     return res
     .status(200)
     .json(
-        new apiResponse(200, result, "Pending Todos fetched successfully")
+        new apiResponse(200, result[0], "Pending Todos fetched successfully")
     )
 })
 
@@ -268,7 +268,7 @@ const getCompletedTodos = asyncHandler(async (req, res)=>{
     return res
     .status(200)
     .json(
-        new apiResponse(200, result, "Completed Todos fetched successfully")
+        new apiResponse(200, result[0], "Completed Todos fetched successfully")
     )
 })
 
