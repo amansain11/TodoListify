@@ -2,48 +2,58 @@ import '../styles/modern-normalize.css';
 import '../styles/style.css';
 import '../styles/components/header.css';
 import '../styles/components/profile-container.css';
+import '../styles/components/error.css';
 
 import authUser from './utils/authenticate-user.js';
 import getUserDetails from './utils/getUserDetails.js';
 import logout from './utils/logout.js';
+import displayError from './utils/error.js';
 
 const fetchUserDetails = async ()=>{
-    const sessionValid = await authUser()
-    if(sessionValid.success){
-        const result = await getUserDetails()
-
-        let data;
-        
-        if(result.success){
-            data = result.data;
-        }
-        else{
-            console.log(result.message)
-            return
-        }
-
-        const username_field = document.getElementById('username')
-        const email_field = document.getElementById('email')
-        const password_field = document.getElementById('oldPassword')
-
-        let passwordFieldValue = "";
-
-        for(let i=1; i<=data.passwordLength; i++){
-            passwordFieldValue = passwordFieldValue + '*';
-        }
-
-        username_field.value = data.username;
-        username_field.disabled = true;
-
-        email_field.value = data.email;
-        email_field.disabled = true;
-
-        password_field.value = passwordFieldValue;
-        password_field.disabled = true;
-    }
-    else{
-        window.location.href = '/login.html';
-    }
+   try {
+     const sessionValid = await authUser()
+ 
+     if(sessionValid.success){
+         const result = await getUserDetails()
+ 
+         let data;
+         
+         if(result.success){
+             data = result.data;
+         }
+         else{
+             displayError(result.message)
+             return
+         }
+ 
+         const username_field = document.getElementById('username')
+         const email_field = document.getElementById('email')
+         const password_field = document.getElementById('oldPassword')
+ 
+         let passwordFieldValue = "";
+ 
+         for(let i=1; i<=data.passwordLength; i++){
+             passwordFieldValue = passwordFieldValue + '*';
+         }
+ 
+         username_field.value = data.username;
+         username_field.disabled = true;
+ 
+         email_field.value = data.email;
+         email_field.disabled = true;
+ 
+         password_field.value = passwordFieldValue;
+         password_field.disabled = true;
+     }
+     else{
+         window.location.href = '/login.html';
+     }
+   } catch (error) {
+        displayError("Something Went Wrong..")
+        setTimeout(()=>{
+            location.href = '/login.html';
+        }, 6000)
+   }
 }
 
 const updateUserDetails = ()=>{
@@ -90,14 +100,13 @@ const updateUserDetails = ()=>{
             const result = await response.json()
     
             if(result.success){
-                console.log(result.message)
                 window.location.href = '/profile-page.html';
             }
             else{
-                console.log("user details update failed")
+                displayError("Failed updating details, Something went wrong..")
             }
         } catch (error) {
-            throw new Error("Error updating user details", error)
+            displayError("Failed updating details, Something went wrong..")
         }
     })
 }
@@ -110,6 +119,7 @@ const changePassword = ()=>{
     updateButton.addEventListener('click', ()=>{
         const old_password_field = document.getElementById('oldPassword')
         const new_password_field = document.getElementById('newPassword')
+        const oldPassword_field_title = document.getElementById('oldPassword-field-title')
 
         new_password_field.parentElement.style.display = 'flex';
 
@@ -119,6 +129,7 @@ const changePassword = ()=>{
 
         updateButton.style.display = 'none';
         saveButton.style.display = 'flex';
+        oldPassword_field_title.innerHTML = 'Old Password';
     })
 
     passwordForm.addEventListener('submit', async (event)=>{
@@ -146,14 +157,13 @@ const changePassword = ()=>{
             const result = await response.json()
     
             if(result.success){
-                console.log(result.message)
                 window.location.href = '/profile-page.html';
             }
             else{
-                console.log("password change failed")
+                displayError("Invalid Credentials..")
             }
         } catch (error) {
-            throw new Error("Error changing user password", error)
+            displayError("Invalid Credentials..")
         }
     })
 }

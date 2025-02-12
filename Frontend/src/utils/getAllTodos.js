@@ -1,3 +1,5 @@
+import displayError from "./error.js";
+
 const getAllTodos = async (page, limit)=>{
     const url = `http://localhost:8000/api/v1/todos/get-all-todos?page=${page}&limit=${limit}`;
 
@@ -16,10 +18,10 @@ const getAllTodos = async (page, limit)=>{
             return result.data;
         }
         else{
-            console.error(result.message)
+            displayError(result.message)
         }
     } catch (error) {
-        throw new Error("Error while fetching all todos", error)
+        displayError("Something went wrong while fetching todos..")
     }
 }
 

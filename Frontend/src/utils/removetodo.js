@@ -1,3 +1,5 @@
+import displayError from "./error.js";
+
 const removeTodo = async(todoId)=>{
     const url = `http://localhost:8000/api/v1/todos/delete-todo/${todoId}`;
 
@@ -11,7 +13,7 @@ const removeTodo = async(todoId)=>{
     
         return result;
     } catch (error) {
-        console.log(error)
+        displayError("Failed Removing Todo..")
     }
 }
 

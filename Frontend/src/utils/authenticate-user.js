@@ -13,11 +13,9 @@ const authUser = async()=>{
         const result = await response.json()
 
         if(result.success){
-            console.log("Entered in if with true")
             return result;
         }
         else{
-            console.log("Entered in else with false")
             return result ;
         }
     } catch (error) {

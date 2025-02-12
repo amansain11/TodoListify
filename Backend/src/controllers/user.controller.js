@@ -173,7 +173,7 @@ const changePassword = asyncHandler(async(req, res)=>{
         throw new apiError(404, "User does not exists")
     }
 
-    const isPasswordValid = user.isPasswordCorrect(oldPassword)
+    const isPasswordValid = await user.isPasswordCorrect(oldPassword)
 
     if(!isPasswordValid){
         throw new apiError(404, "Invalid user credentials")

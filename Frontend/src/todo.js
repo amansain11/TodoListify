@@ -3,6 +3,7 @@ import "../styles/style.css";
 import "../styles/components/header.css";
 import "../styles/components/empty-content-box.css";
 import "../styles/components/todo-container.css";
+import "../styles/components/error.css";
 
 import hamburger from "./utils/hamburger.js";
 import refreshAccessToken from "./utils/refresh-access-token.js";
@@ -12,12 +13,26 @@ import removeTodo from "./utils/removetodo.js";
 import checkbox from "./utils/checkbox.js";
 import getAllPendingTodos from "./utils/getAllPendingTodos.js";
 import getAllCompletedTodos from "./utils/getAllCompletedTodos.js";
+import displayError from "./utils/error.js";
+import authUser from "./utils/authenticate-user.js";
 
 let currentPage = 1;
 const limit = 10;
 let AllTodosFlag = true
 let PendingTodosFlag = false
 let CompleteTodosFlag = false
+
+try {
+  const sessionValid = await authUser()
+  if(!sessionValid.success){
+      location.href = '/login.html';
+  }
+} catch (error) {
+  displayError("Something Went Wrong..")
+  setTimeout(()=>{
+      location.href = '/login.html';
+  }, 6000)
+}
 
 const createTodoElement = (todoId, todoTitle, todoDate)=>{
   let todoBox = document.createElement("li");
@@ -144,7 +159,7 @@ const loadTodos = async() => {
         togglePaginationButtons(data.totalCount);
       }
     })
-    .catch((error) => console.log("Error fetching all todos", error));
+    .catch((error) => displayError("Something went wrong while fetching todos.."));
 };
 
 const loadPendingTodos = async() => {
@@ -156,7 +171,6 @@ const loadPendingTodos = async() => {
   .then(data => {
     if(data.totalCount === 0){
       togglePaginationButtons(1)
-      console.log("there is not any todo pending")
     }
     else{
       data.todos.forEach(todo => {
@@ -168,7 +182,7 @@ const loadPendingTodos = async() => {
       togglePaginationButtons(data.totalCount);
     }
   })
-  .catch(error => console.log("Error fetching all pending todos", error))
+  .catch(error => displayError("Something went wrong while fetching todos.."))
 }
 
 const loadCompletedTodos = async() => {
@@ -180,7 +194,6 @@ const loadCompletedTodos = async() => {
   .then(data => {
     if(data.totalCount === 0){
       togglePaginationButtons(1)
-      console.log("there is not any todo completed")
     }
     else{
       data.todos.forEach(todo => {
@@ -192,7 +205,7 @@ const loadCompletedTodos = async() => {
       togglePaginationButtons(data.totalCount);
     }
   })
-  .catch(error => console.log("Error fetching all completed todos", error))
+  .catch(error => displayError("Something went wrong while fetching todos.."))
 }
 
 const paginationHandler = () => {
@@ -272,26 +285,26 @@ const addTodo = () => {
       credentials: "include",
       body: data.toString(),
     })
-      .then((Response) => Response.json())
-      .then((data) => {
-        if (data.success) {
-          form.reset();
+    .then((Response) => Response.json())
+    .then((data) => {
+      if (data.success) {
+        form.reset();
 
-          if(AllTodosFlag){
-            loadTodos()
-          }
-          if(PendingTodosFlag){
-            loadPendingTodos()
-          }
-          if(CompleteTodosFlag){
-            loadCompletedTodos()
-          }
+        if(AllTodosFlag){
+          loadTodos()
         }
-         else {
-          console.log("Failed adding todo: ", data.message);
+        if(PendingTodosFlag){
+          loadPendingTodos()
         }
-      })
-      .catch((error) => console.error("Error: ", error));
+        if(CompleteTodosFlag){
+          loadCompletedTodos()
+        }
+      }
+       else {
+        displayError(data.message)
+      }
+    })
+    .catch((error) => displayError("Failed Adding New Todo.."));
   });
 };
 
@@ -305,20 +318,20 @@ const removeTodoHandler = () => {
       const todoId = removeButton.closest('.todo-box').id;
 
       const result = await removeTodo(todoId)
-
+ 
       if(result.success){
-        if(AllTodosFlag){
-          loadTodos()
-        }
-        if(PendingTodosFlag){
-          loadPendingTodos()
-        }
-        if(CompleteTodosFlag){
-          loadCompletedTodos()
-        }
+         if(AllTodosFlag){
+           loadTodos()
+         }
+         if(PendingTodosFlag){
+           loadPendingTodos()
+         }
+         if(CompleteTodosFlag){
+           loadCompletedTodos()
+         }
       }
-      else{
-        console.log(result.message)
+      else {
+          displayError(result.message)
       }
     }
   });
@@ -335,16 +348,21 @@ const checkboxHandler = () => {
 
       const result = await checkbox(todoId)
 
-      toggleCheckbox(todoId, result.data.complete)
+      if(result.success){
+        toggleCheckbox(todoId, result.data.complete)
 
-      if(AllTodosFlag){
-        loadTodos()
+        if(AllTodosFlag){
+          loadTodos()
+        }
+        if(PendingTodosFlag){
+          loadPendingTodos()
+        }
+        if(CompleteTodosFlag){
+          loadCompletedTodos()
+        }
       }
-      if(PendingTodosFlag){
-        loadPendingTodos()
-      }
-      if(CompleteTodosFlag){
-        loadCompletedTodos()
+      else{
+        displayError(result.message)
       }
     }
   });
@@ -401,10 +419,10 @@ const editTodoHandler = () => {
             }
           }
           else{
-            console.log("Failed updating todo: ", data.message)
+            displayError(data.message)
           }
         })
-        .catch(error => console.error("Error: ", error))
+        .catch(error => displayError("Failed Updating Todo.."))
       })
     }
   });

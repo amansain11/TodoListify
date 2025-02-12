@@ -1,3 +1,5 @@
+import displayError from "./error.js";
+
 const getUserDetails = async ()=>{
     const url = 'http://localhost:8000/api/v1/users/current-user';
 
@@ -19,7 +21,7 @@ const getUserDetails = async ()=>{
             return result;
         }
     } catch (error) {
-        throw new Error("Error fetching user details", error)
+        displayError("Failed Fetching User Details..")
     }
 }
 

@@ -1,7 +1,9 @@
-const logout = ()=>{
+import displayError from "./error.js";
+
+const logout = async()=>{
     const url = 'http://localhost:8000/api/v1/users/logout'
 
-    fetch(url,{
+    await fetch(url,{
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -11,14 +13,13 @@ const logout = ()=>{
     .then(response => response.json())
     .then(data => {
         if(data.success){
-            console.log(data)
             window.location.href = '/login.html';
         }
         else{
-            console.log('Logout failed', data.message)
+            displayError(data.message)
         }
     })
-    .catch(error => console.log("Error while logging out: ",error))            
+    .catch(error => displayError("Logging out Failed, Try again latter.."))
 }
 
 export default logout;

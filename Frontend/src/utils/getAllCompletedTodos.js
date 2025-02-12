@@ -1,3 +1,5 @@
+import displayError from "./error.js";
+
 const getAllCompletedTodos = async (page, limit)=>{
     const url = `http://localhost:8000/api/v1/todos/get-completed-todos?page=${page}&limit=${limit}`;
 
@@ -13,10 +15,10 @@ const getAllCompletedTodos = async (page, limit)=>{
             return result.data
         }
         else{
-            console.log(result.message)
+            displayError(result.message)
         }  
     } catch (error) {
-        throw new Error("Error while fetching all completed todos ", error)
+        displayError("Something went wrong while fetching todos..")
     }  
 }
 

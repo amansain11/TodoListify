@@ -1,3 +1,5 @@
+import displayError from "./error.js";
+
 const checkbox = async (todoId)=>{
     const url = `http://localhost:8000/api/v1/todos/toggle-completion/${todoId}`;
 
@@ -11,7 +13,7 @@ const checkbox = async (todoId)=>{
     
         return result
     } catch (error) {
-        console.log(error)
+        displayError("Failed Toggling Completion..")
     }
 }
 

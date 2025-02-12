@@ -1,4 +1,5 @@
 import authUser from "./authenticate-user.js";
+import displayError from "./error.js";
 
 const refreshAccessToken = async ()=>{
     const sessionValid = await authUser();
@@ -27,16 +28,14 @@ const refreshAccessToken = async ()=>{
         })
         .then(response => {
             if(response.ok){
-                console.log("Access Token is refreshed successfully")
                 location.reload()
             }
             else{
-                console.log("Access Token is not refreshed")
                 window.location.href = '/login.html';
             }
         })
         .catch(error =>{
-            console.log("Error refreshing access token", error);
+            displayError("Failed Refreshing Access Token..")
         })
 
         let profile_btn = document.createElement('a');

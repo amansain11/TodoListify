@@ -1,6 +1,17 @@
 import '../styles/modern-normalize.css';
 import '../styles/style.css';
 import '../styles/register-login-page.css';
+import '../styles/components/error.css';
+
+import authUser from './utils/authenticate-user.js';
+import displayError from './utils/error.js';
+
+(async() => {
+    const session = await authUser()
+    if(session.success){
+        location.href = '/todo-page.html';
+    }
+})()
 
 const login = ()=>{
     const form = document.getElementById('login-form')
@@ -16,29 +27,25 @@ const login = ()=>{
         data.append('email', formData.get('email'))
         data.append('password', formData.get('password'))
 
-        try {
-            fetch(url,{
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                },
-                credentials: 'include',
-                body: data.toString()
-            })
-            .then(response => response.json())
-            .then(data => {
-                if(data.success){
-                    form.reset()
-                    window.location.href = '/todo-page.html';
-                }
-                else{
-                    console.log("Login failed: ",data.message)
-                }
-            })
-            .catch(error => console.error('Error:',error))
-        } catch (error) {
-            console.log(error)
-        }
+        fetch(url,{
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            credentials: 'include',
+            body: data.toString()
+        })
+        .then(response => response.json())
+        .then(data => {
+            if(data.success){
+                form.reset()
+                window.location.href = '/todo-page.html';
+            }
+            else{
+                displayError("Login Failed, Something went wrong..")
+            }
+        })
+        .catch(error => displayError("Login Failed, Something went wrong.."))
     })
 }
 
