@@ -3,15 +3,7 @@ import '../styles/style.css';
 import '../styles/register-login-page.css';
 import '../styles/components/error.css';
 
-import authUser from './utils/authenticate-user.js';
 import displayError from './utils/error.js';
-
-(async() => {
-    const session = await authUser()
-    if(session.success){
-        location.href = '/todo-page.html';
-    }
-})()
 
 const login = ()=>{
     const form = document.getElementById('login-form')

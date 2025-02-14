@@ -87,7 +87,7 @@
 #content-box-items{
     display: none;
     width: 100%;
-    justify-content: space-between;
+    gap: 20px;
 }
 
 .move-left{

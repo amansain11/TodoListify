@@ -15,13 +15,7 @@ const todoSchema = new mongoose.Schema(
         owner: {
             type: mongoose.Types.ObjectId,
             ref: "User"
-        },
-        subTodos: [
-            {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: "SubTodo"
-            }
-        ]
+        }
     },{timestamps: true}
 )
 
