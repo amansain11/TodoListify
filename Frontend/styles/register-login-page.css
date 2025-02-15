@@ -79,7 +79,7 @@
     font-size: 14px;
     padding: 1em;
     width: 100%;
-    background-color: #ae7aff;
+    background-color: var(--submit-btn);
     box-shadow: 5px 5px 0px 0px #4f4e4e;
     color: black;
     margin: 15px 0;

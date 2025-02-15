@@ -1,5 +1,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
+:root{
+    --accent: #A5FFC9;
+    --accent-dark: #456b54;
+    --submit-btn: #A5C9FF;
+    --rm-btn: #ef4444;
+    --rm-hv-btn: #f87171;
+    --rm-act-btn: #dc2626;
+    --edt-btn: #3b82f6;
+    --edt-hv-btn: #60a5fa;
+    --edt-act-btn: #2563eb;
+    --grn-btn: #22c55e;
+    --grn-hv-btn: #4ade80;
+    --grn-act-btn: #16a34a;
+}
+
 *{
     margin: 0;
     padding: 0;

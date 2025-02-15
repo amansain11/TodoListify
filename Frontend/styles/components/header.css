@@ -53,7 +53,7 @@
 }
 
 .desktop-header .desktop-user-profile a{
-    color: orangered;
+    color: var(--accent);
     display: flex;
     align-items: center;
     gap: 5px;
@@ -71,7 +71,7 @@
 }
 
 .icon-fill{
-    fill: orangered;
+    fill: var(--accent);
 }
 
 .mobile-header{
@@ -149,7 +149,7 @@
 }
 
 #content-box-items .mobile-user-profile a{
-    color: orangered;
+    color: var(--accent);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -161,7 +161,7 @@
 }
 
 .mobile-user-profile a span{
-    color: orangered;
+    color: var(--accent);
 }
 
 .hamburger-box{

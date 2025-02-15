@@ -161,10 +161,10 @@ const togglePaginationButtons = (totalCount) => {
   }
 
   prevBtn.disabled = currentPage === 1;
-  prevBtn.style.color = prevBtn.disabled ? "#962901" : "orangered";
+  prevBtn.style.color = prevBtn.disabled ? "var(--accent-dark)" : "var(--accent)";
 
   nextBtn.disabled = currentPage === totalPages;
-  nextBtn.style.color = nextBtn.disabled ? "#962901" : "orangered";
+  nextBtn.style.color = nextBtn.disabled ? "var(--accent-dark)" : "var(--accent)";
 };
 
 const loadTodos = async() => {

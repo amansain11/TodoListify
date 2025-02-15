@@ -28,7 +28,6 @@
 }
 
 .title-bar button{
-    /* display: flex; */
     align-items: center;
     justify-content: center;
     padding: 5px 8px;
@@ -50,15 +49,15 @@
 .edit-btn{
     display: flex;
     font-weight: normal;
-    background-color: #3b82f6;
+    background-color: var(--edt-btn);
 }
 
 .edit-btn:hover{
-    background-color: #60a5fa;
+    background-color: var(--edt-hv-btn);
 }
 
 .edit-btn:active{
-    background-color: #2563eb;
+    background-color: var(--edt-act-btn);
 }
 
 .save-btn{
@@ -72,15 +71,15 @@
 }
 
 .save-btn{
-    background-color: #22c55e;
+    background-color: var(--grn-btn);
 }
 
 .save-btn:hover{
-    background-color: #4ade80;
+    background-color: var(--grn-hv-btn);
 }
 
 .save-btn:active{
-    background-color: #16a34a;
+    background-color: var(--grn-act-btn);
 }
 
 .field-box{
@@ -106,7 +105,7 @@
     border: none;
     color: white;
     font-weight: bold;
-    caret-color: orangered;
+    caret-color: var(--accent);
 }
 
 .fields input::placeholder{
@@ -137,7 +136,7 @@
 
 #logout-button{
     text-decoration: none;
-    color: orangered;
+    color: var(--accent);
     text-wrap: nowrap;
     font-weight: 500;
     letter-spacing: 1px;
@@ -148,16 +147,6 @@
     width: 100%;
     background-color: #374151;
 }
-
-
-/* xs */
-/* @media (min-width: 320px){
-
-} */
-
-/* sm */
-/* @media (min-width: 425px){
-} */
 
 
 /* md */
@@ -204,15 +193,3 @@
         font-size: 17px;
     }
 }
-
-/* lg */
-/* @media (min-width: 824px){
-} */
-
-/* xl */
-/* @media (min-width: 1024px){
-} */
-
-/* 2xl */
-/* @media (min-width: 1425px){
-} */

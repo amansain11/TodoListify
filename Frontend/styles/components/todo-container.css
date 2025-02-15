@@ -65,7 +65,7 @@
 }
 
 .add-todo-box #icon-box{
-    background-color: #22c55e;
+    background-color: var(--grn-btn);
     height: 100%;
     width: 55px;
     display: flex;
@@ -74,11 +74,11 @@
 }
 
 .add-todo-box #icon-box:hover{
-    background-color: #4ade80;
+    background-color: var(--grn-hv-btn);
 }
 
 .add-todo-box #icon-box:active{
-    background-color: #16a34a;
+    background-color: var(--grn-act-btn);
 }
 
 .add-todo-box #icon-box svg{
@@ -158,7 +158,7 @@
 }
 
 .marked-checked{
-    background-color: #22c55e;
+    background-color: var(--grn-btn);
 }
 
 .todo-content-right{
@@ -174,16 +174,16 @@
 }
 
 .todo-content-right #remove{
-    background-color: #ef4444;
+    background-color: var(--rm-btn);
     padding: 5px;
 }
 
 .todo-content-right #remove:hover{
-    background-color: #f87171;
+    background-color: var(--rm-hv-btn);
 }
 
 .todo-content-right #remove:active{
-    background-color: #dc2626;
+    background-color: var(--rm-act-btn);
 }
 
 .todo-content-right #remove svg{
@@ -191,16 +191,16 @@
 }
 
 .todo-content-right #edit{
-    background-color: #3b82f6;
+    background-color: var(--edt-btn);
     padding: 5px;
 }
 
 .todo-content-right #edit:hover{
-    background-color: #60a5fa;
+    background-color: var(--edt-hv-btn);
 }
 
 .todo-content-right #edit:active{
-    background-color: #2563eb;
+    background-color: var(--edt-act-btn);
 }
 
 .todo-content-right #edit svg{
@@ -232,19 +232,18 @@
     width: 25px inherit;
     width: 50px;
     height: 25px;
-    background: #2ec666;
 }
 
 .save-btn{
-    background-color: #22c55e;
+    background-color: var(--grn-btn);
 }
 
 .save-btn:hover{
-    background-color: #4ade80;
+    background-color: var(--grn-hv-btn);
 }
 
 .save-btn:active{
-    background-color: #16a34a;
+    background-color: var(--grn-act-btn);
 }
 
 .footer-box{
@@ -265,7 +264,7 @@
 }
 
 #prev-button, #next-button{
-    color: #962901;
+    color: var(--accent);
     text-wrap: nowrap;
     font-weight: 500;
     letter-spacing: 1px;
