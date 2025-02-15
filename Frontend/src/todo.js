@@ -88,7 +88,8 @@ const createTodoElement = (todoId, todoTitle, todoDate)=>{
                         </svg>
                         </span>
                         <div class="todo-title">
-                            <a id="todo-title">${todoTitle}</a>
+                            <a id="title-text">${todoTitle}</a>
+                            <div id="full-title-text">${todoTitle}</div>
                         </div>
                     </div>
                     <div class="todo-content-right">

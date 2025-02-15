@@ -16,7 +16,6 @@
     justify-content: center;
 }
 
-
 .navigation-button-box{
     display: none;
     align-items: center;
@@ -113,6 +112,42 @@
     overflow: hidden;
     text-overflow: ellipsis;
     width: 13vw;
+}
+
+#title-text{
+    cursor: pointer;
+}
+
+#full-title-text{
+    display: none;
+    background: rgb(35, 35, 35);
+    border: 1px solid gray;
+    padding: 3px;
+    font-size: 11px;
+    text-align: center;
+    width: fit-content;
+    position: absolute;
+    transform: translate(2%, 10%);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.1s ease-in-out;
+}
+
+.todo-title:hover{
+     #full-title-text{
+        display: block;
+        animation: showText .1s forwards;
+        animation-delay: .7s;
+    }
+}
+
+@keyframes showText{
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
 }
 
 #todo-checkbox{
