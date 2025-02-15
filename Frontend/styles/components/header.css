@@ -32,6 +32,19 @@
     font-size: 20px;
 }
 
+.desktop-header .logo-box span{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+}
+
+.desktop-header .logo-box span > div{
+    position: absolute;
+    top: -6px;
+    right: -45px;
+}
+
 .desktop-header .desktop-user-profile{
     padding: 18px 13px;
     display: flex;
@@ -82,6 +95,13 @@
 .content-box span{
     color: white;
     font-size: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.content-box span > div{
+    width: 35px;
 }
 
 #content-box-items{

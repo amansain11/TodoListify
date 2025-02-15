@@ -15,6 +15,7 @@ import getAllPendingTodos from "./utils/getAllPendingTodos.js";
 import getAllCompletedTodos from "./utils/getAllCompletedTodos.js";
 import displayError from "./utils/error.js";
 import authUser from "./utils/authenticate-user.js";
+import loading from "./utils/loading.js";
 
 let currentPage = 1;
 const limit = 10;
@@ -22,15 +23,26 @@ let AllTodosFlag = true
 let PendingTodosFlag = false
 let CompleteTodosFlag = false
 
+const loadingParent = window.innerWidth < 724 ? document.getElementById('content-box-title') : document.getElementById('logo-box-title') ;
+const loadingChild = loading()
+
+loadingParent.appendChild(loadingChild)
+
 try {
   const sessionValid = await authUser()
+
   if(!sessionValid.success){
+    loadingChild.remove()
     displayError("Something Went Wrong..")
     setTimeout(()=>{
         location.href = '/login.html';
     }, 6000)
   }
+
+  loadingChild.remove()
 } catch (error) {
+  loadingChild.remove()
+
   displayError("Something Went Wrong..")
   setTimeout(()=>{
       location.href = '/login.html';
@@ -76,7 +88,7 @@ const createTodoElement = (todoId, todoTitle, todoDate)=>{
                         </svg>
                         </span>
                         <div class="todo-title">
-                            <a id="todo-title" href="#">${todoTitle}</a>
+                            <a id="todo-title">${todoTitle}</a>
                         </div>
                     </div>
                     <div class="todo-content-right">
@@ -166,15 +178,19 @@ const loadTodos = async() => {
 
   todoWrapper.innerHTML = "";
 
+  loadingParent.appendChild(loadingChild)
+
   await getAllTodos(currentPage, limit)
     .then((data) => {
       if (data.totalCount === 0) {
+        loadingChild.remove()
         navigationButtonBox.style.display = "none";
         todosBox.style.display = "none";
         emptyContentBox.style.display = "flex";
         container.classList.add("justify-center");
         footer.style.display = "none";
       } else {
+        loadingChild.remove()
         navigationButtonBox.style.display = "flex";
         todosBox.style.display = "flex";
         footer.style.display = "flex";
@@ -189,7 +205,10 @@ const loadTodos = async() => {
         togglePaginationButtons(data.totalCount);
       }
     })
-    .catch((error) => displayError("Something went wrong while fetching todos.."));
+    .catch((error) => {
+      loadingChild.remove()
+      displayError("Something went wrong while fetching todos..")
+    });
 };
 
 const loadPendingTodos = async() => {
@@ -197,12 +216,16 @@ const loadPendingTodos = async() => {
 
   todoWrapper.innerHTML = "";
 
+  loadingParent.appendChild(loadingChild)
+
   await getAllPendingTodos(currentPage, limit)
   .then(data => {
     if(data.totalCount === 0){
+      loadingChild.remove()
       togglePaginationButtons(1)
     }
     else{
+      loadingChild.remove()
       data.todos.forEach(todo => {
           const todoBox = createTodoElement(todo._id, todo.title, todo.createdAt)
           todoWrapper.appendChild(todoBox);
@@ -212,7 +235,10 @@ const loadPendingTodos = async() => {
       togglePaginationButtons(data.totalCount);
     }
   })
-  .catch(error => displayError("Something went wrong while fetching todos.."))
+  .catch(error => {
+      loadingChild.remove()
+      displayError("Something went wrong while fetching todos..")
+  })
 }
 
 const loadCompletedTodos = async() => {
@@ -220,12 +246,16 @@ const loadCompletedTodos = async() => {
 
   todoWrapper.innerHTML = "";
 
+  loadingParent.appendChild(loadingChild)
+
   await getAllCompletedTodos(currentPage, limit)
   .then(data => {
     if(data.totalCount === 0){
+      loadingChild.remove()
       togglePaginationButtons(1)
     }
     else{
+      loadingChild.remove()
       data.todos.forEach(todo => {
           const todoBox = createTodoElement(todo._id, todo.title, todo.createdAt)
           todoWrapper.appendChild(todoBox);
@@ -235,7 +265,10 @@ const loadCompletedTodos = async() => {
       togglePaginationButtons(data.totalCount);
     }
   })
-  .catch(error => displayError("Something went wrong while fetching todos.."))
+  .catch(error => {
+      loadingChild.remove()
+      displayError("Something went wrong while fetching todos..")
+  })
 }
 
 const paginationHandler = () => {
@@ -300,6 +333,8 @@ const addTodo = () => {
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
 
+    loadingParent.appendChild(loadingChild)
+
     const url = "http://localhost:8000/api/v1/todos/add-todo";
 
     const formData = new FormData(form);
@@ -318,6 +353,7 @@ const addTodo = () => {
     .then((Response) => Response.json())
     .then((data) => {
       if (data.success) {
+        loadingChild.remove()
         form.reset();
 
         if(AllTodosFlag){
@@ -330,11 +366,15 @@ const addTodo = () => {
           loadCompletedTodos()
         }
       }
-       else {
+      else {
+        loadingChild.remove()
         displayError(data.message)
       }
     })
-    .catch((error) => displayError("Failed Adding New Todo.."));
+    .catch((error) => {
+      loadingChild.remove()
+      displayError("Failed Adding New Todo..")
+    });
   });
 };
 
@@ -347,9 +387,12 @@ const removeTodoHandler = () => {
     if(removeButton){
       const todoId = removeButton.closest('.todo-box').id;
 
+      loadingParent.appendChild(loadingChild)
+
       const result = await removeTodo(todoId)
  
       if(result.success){
+        loadingChild.remove()
          if(AllTodosFlag){
            loadTodos()
          }
@@ -361,6 +404,7 @@ const removeTodoHandler = () => {
          }
       }
       else {
+          loadingChild.remove()
           displayError(result.message)
       }
     }
@@ -376,9 +420,13 @@ const checkboxHandler = () => {
     if(checkboxbtn){
       const todoId = checkboxbtn.closest('.todo-box').id;
 
+      loadingParent.appendChild(loadingChild)
+
       const result = await checkbox(todoId)
 
       if(result.success){
+        loadingChild.remove()
+
         toggleCheckbox(todoId, result.data.complete)
 
         if(AllTodosFlag){
@@ -392,6 +440,7 @@ const checkboxHandler = () => {
         }
       }
       else{
+        loadingChild.remove()
         displayError(result.message)
       }
     }
@@ -420,6 +469,8 @@ const editTodoHandler = () => {
       form.addEventListener('submit', async(event) => {
         event.preventDefault()
 
+        loadingParent.appendChild(loadingChild)
+
         const url = `http://localhost:8000/api/v1/todos/update-todo/${todoId}`;
 
         const formData = new FormData(form)
@@ -438,6 +489,8 @@ const editTodoHandler = () => {
         .then(Response => Response.json())
         .then(data => {
           if(data.success){
+            loadingChild.remove()
+
             if(AllTodosFlag){
               loadTodos()
             }
@@ -449,10 +502,14 @@ const editTodoHandler = () => {
             }
           }
           else{
+            loadingChild.remove()
             displayError(data.message)
           }
         })
-        .catch(error => displayError("Failed Updating Todo.."))
+        .catch(error => {
+          loadingChild.remove()
+          displayError("Failed Updating Todo..")
+        })
       })
     }
   });

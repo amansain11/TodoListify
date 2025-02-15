@@ -8,20 +8,29 @@ import authUser from './utils/authenticate-user.js';
 import getUserDetails from './utils/getUserDetails.js';
 import logout from './utils/logout.js';
 import displayError from './utils/error.js';
+import loading from './utils/loading.js';
+import refreshAccessToken from './utils/refresh-access-token.js';
+
+const loadingParent = window.innerWidth < 724 ? document.getElementById('content-box-title') : document.getElementById('logo-box-title') ;
+const loadingChild = loading()
 
 const fetchUserDetails = async ()=>{
    try {
      const sessionValid = await authUser()
  
      if(sessionValid.success){
+        loadingParent.appendChild(loadingChild)
+
          const result = await getUserDetails()
  
          let data;
          
          if(result.success){
+             loadingChild.remove()
              data = result.data;
          }
          else{
+             loadingChild.remove()
              displayError(result.message)
              return
          }
@@ -46,7 +55,14 @@ const fetchUserDetails = async ()=>{
          password_field.disabled = true;
      }
      else{
-         window.location.href = '/login.html';
+        const result = await refreshAccessToken()
+  
+        if(result.ok){
+            location.reload()
+        }
+        else{
+          location.href = '/login.html';
+        }
      }
    } catch (error) {
         displayError("Something Went Wrong..")
@@ -78,6 +94,8 @@ const updateUserDetails = ()=>{
     userDetailsForm.addEventListener('submit', async (event)=>{
         event.preventDefault();
 
+        loadingParent.appendChild(loadingChild)
+
         const url = 'http://localhost:8000/api/v1/users/update-account-details';
 
         const formData = new FormData(userDetailsForm)
@@ -100,12 +118,15 @@ const updateUserDetails = ()=>{
             const result = await response.json()
     
             if(result.success){
+                loadingChild.remove()
                 window.location.href = '/profile-page.html';
             }
             else{
+                loadingChild.remove()
                 displayError("Failed updating details, Something went wrong..")
             }
         } catch (error) {
+            loadingChild.remove()
             displayError("Failed updating details, Something went wrong..")
         }
     })
@@ -135,6 +156,8 @@ const changePassword = ()=>{
     passwordForm.addEventListener('submit', async (event)=>{
         event.preventDefault();
 
+        loadingParent.appendChild(loadingChild)
+
         const url = 'http://localhost:8000/api/v1/users/change-password';
 
         const formData = new FormData(passwordForm)
@@ -157,12 +180,15 @@ const changePassword = ()=>{
             const result = await response.json()
     
             if(result.success){
+                loadingChild.remove()
                 window.location.href = '/profile-page.html';
             }
             else{
+                loadingChild.remove()
                 displayError("Invalid Credentials..")
             }
         } catch (error) {
+            loadingChild.remove()
             displayError("Invalid Credentials..")
         }
     })
@@ -173,7 +199,11 @@ const loggingOut = ()=>{
 
     logoutButton.addEventListener('click', async (event)=>{
         event.preventDefault()
+
+        loadingParent.appendChild(loadingChild)
+        
         logout()
+        loadingChild.remove()
     })
 }
 

@@ -4,12 +4,17 @@ import '../styles/register-login-page.css';
 import '../styles/components/error.css';
 
 import displayError from './utils/error.js';
+import loading from './utils/loading.js';
 
 const login = ()=>{
     const form = document.getElementById('login-form')
+    const loadingParent = document.querySelector('.title')
+    const loadingChild = loading()
 
     form.addEventListener('submit', (event)=>{
         event.preventDefault()
+
+        loadingParent.appendChild(loadingChild)
 
         const url = 'http://localhost:8000/api/v1/users/login'
 
@@ -30,14 +35,19 @@ const login = ()=>{
         .then(response => response.json())
         .then(data => {
             if(data.success){
+                loadingChild.remove()
                 form.reset()
                 window.location.href = '/todo-page.html';
             }
             else{
+                loadingChild.remove()
                 displayError("Login Failed, Something went wrong..")
             }
         })
-        .catch(error => displayError("Login Failed, Something went wrong.."))
+        .catch(error => {
+            loadingChild.remove()
+            displayError("Login Failed, Something went wrong..")
+        })
     })
 }
 

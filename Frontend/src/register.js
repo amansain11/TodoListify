@@ -4,12 +4,17 @@ import '../styles/register-login-page.css';
 import '../styles/components/error.css';
 
 import displayError from './utils/error.js';
+import loading from './utils/loading.js';
 
 const register = ()=>{ 
     const form = document.getElementById('register-form')
+    const loadingParent = document.querySelector('.title')
+    const loadingChild = loading()
 
     form.addEventListener('submit', async (event)=>{
         event.preventDefault(); 
+
+        loadingParent.appendChild(loadingChild)
 
         const url = 'http://localhost:8000/api/v1/users/register'
 
@@ -30,14 +35,19 @@ const register = ()=>{
         .then(response => response.json())
         .then((data) => {
             if(data.success){
+                loadingChild.remove()
                 form.reset()
                 window.location.href = '/login.html';
             }
             else{
+                loadingChild.remove()
                 displayError("Registration Failed, Something went wrong..")
             }
         })
-        .catch(error => displayError("Registration Failed, Something went wrong.."))
+        .catch(error => {
+            loadingChild.remove()
+            displayError("Registration Failed, Something went wrong..")
+        })
     })
 }
 
