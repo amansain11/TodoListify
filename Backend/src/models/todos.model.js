@@ -5,7 +5,6 @@ const todoSchema = new mongoose.Schema(
         title: {
             type: String,
             required: true,
-            unique: true,
             lowercase: true
         },
         complete: {
@@ -17,6 +16,14 @@ const todoSchema = new mongoose.Schema(
             ref: "User"
         }
     },{timestamps: true}
+)
+
+todoSchema.index( //compostie unique index, gruop of title and owner index should be unique
+    {
+        title: 1,  
+        owner: 1
+    },
+    { unique: true }
 )
 
 export const Todo = mongoose.model('Todo', todoSchema)

@@ -11,12 +11,6 @@ const addTodo = asyncHandler(async (req, res)=>{
         throw new apiError(400, "title cannot be empty")
     }
 
-    const existedTodo = await Todo.findOne({title})
-
-    if(existedTodo){
-        throw new apiError(404, "Todo already exists")
-    }
-
     const todo = await Todo.create(
         {
             title: title,
