@@ -1,7 +1,7 @@
 import displayError from "./error.js";
 
 const checkbox = async (todoId)=>{
-    const url = `http://localhost:8000/api/v1/todos/toggle-completion/${todoId}`;
+    const url = `${import.meta.env.VITE_BACKEND_URL}/todos/toggle-completion/${todoId}`;
 
     try {
         const response = await fetch(url, {

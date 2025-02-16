@@ -1,7 +1,7 @@
 import displayError from "./error.js";
 
 const getAllPendingTodos = async (page, limit)=>{
-    const url = `http://localhost:8000/api/v1/todos/get-pending-todos?page=${page}&limit=${limit}`;
+    const url = `${import.meta.env.VITE_BACKEND_URL}/todos/get-pending-todos?page=${page}&limit=${limit}`;
 
     try {
         const response = await fetch(url, {

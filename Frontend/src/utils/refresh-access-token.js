@@ -1,7 +1,7 @@
 import displayError from "./error.js";
 
 const refreshAccessToken = async ()=>{
-    const url = 'http://localhost:8000/api/v1/users/refresh-access-token';
+    const url = `${import.meta.env.VITE_BACKEND_URL}/users/refresh-access-token`;
 
     try {
         const response = await fetch(url,{
