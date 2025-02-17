@@ -5,7 +5,7 @@ import '../styles/home-page.css';
 import authUser from "./utils/authenticate-user.js";
 import refreshAccessToken from './utils/refresh-access-token.js';
 
-(async() => {
+const sessionValidation = async() => {
     const session = await authUser()
     if(session.success){
         location.href = '/todo-page.html';
@@ -17,4 +17,6 @@ import refreshAccessToken from './utils/refresh-access-token.js';
             location.reload()
         }
     }
-})()
+}
+
+sessionValidation()

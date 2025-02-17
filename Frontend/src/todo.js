@@ -28,25 +28,27 @@ const loadingChild = loading()
 
 loadingParent.appendChild(loadingChild)
 
-try {
-  const sessionValid = await authUser()
-
-  if(!sessionValid.success){
+const sessionValidation = async ()=>{
+  try {
+    const sessionValid = await authUser()
+  
+    if(!sessionValid.success){
+      loadingChild.remove()
+      displayError("Something Went Wrong..")
+      setTimeout(()=>{
+          location.href = '/login.html';
+      }, 6000)
+    }
+  
     loadingChild.remove()
+  } catch (error) {
+    loadingChild.remove()
+  
     displayError("Something Went Wrong..")
     setTimeout(()=>{
         location.href = '/login.html';
     }, 6000)
   }
-
-  loadingChild.remove()
-} catch (error) {
-  loadingChild.remove()
-
-  displayError("Something Went Wrong..")
-  setTimeout(()=>{
-      location.href = '/login.html';
-  }, 6000)
 }
 
 const refreshAccessTokenHandler = async ()=>{
@@ -564,6 +566,7 @@ const navigationHandler = () => {
 
 }
 
+sessionValidation()
 hamburger();
 refreshAccessTokenHandler();
 loadTodos();
