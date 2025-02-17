@@ -1,7 +1,7 @@
 import displayError from "./error.js";
 
 const removeTodo = async(todoId)=>{
-    const url = `${import.meta.env.VITE_BACKEND_URL}/todos/delete-todo/${todoId}`;
+    const url = `${import.meta.env.VITE_BACKEND_URL}/api/v1/todos/delete-todo/${todoId}`;
 
     try {
         const response = await fetch(url,{

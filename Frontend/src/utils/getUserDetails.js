@@ -1,7 +1,7 @@
 import displayError from "./error.js";
 
 const getUserDetails = async ()=>{
-    const url = `${import.meta.env.VITE_BACKEND_URL}/users/current-user`;
+    const url = `${import.meta.env.VITE_BACKEND_URL}/api/v1/users/current-user`;
 
     try {
         const response = await fetch(url,{

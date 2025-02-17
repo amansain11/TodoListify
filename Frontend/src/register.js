@@ -16,7 +16,7 @@ const register = ()=>{
 
         loadingParent.appendChild(loadingChild)
 
-        const url = `${import.meta.env.VITE_BACKEND_URL}/users/register`;
+        const url = `${import.meta.env.VITE_BACKEND_URL}/api/v1/users/register`;
 
         const formData = new FormData(form)
 
