@@ -1,4 +1,4 @@
-import displayError from "./error.js";
+import displayError from "./todolistify_error.js";
 
 const removeTodo = async(todoId)=>{
     const url = `${import.meta.env.VITE_BACKEND_URL}/api/v1/todos/delete-todo/${todoId}`;

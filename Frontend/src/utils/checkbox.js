@@ -1,4 +1,4 @@
-import displayError from "./error.js";
+import displayError from "./todolistify_error.js";
 
 const checkbox = async (todoId)=>{
     const url = `${import.meta.env.VITE_BACKEND_URL}/api/v1/todos/toggle-completion/${todoId}`;

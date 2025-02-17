@@ -1,9 +1,9 @@
 import '../styles/modern-normalize.css';
 import '../styles/style.css';
 import '../styles/register-login-page.css';
-import '../styles/components/error.css';
+import '../styles/components/todolistify_error.css';
 
-import displayError from './utils/error.js';
+import displayError from './utils/todolistify_error.js';
 import loading from './utils/loading.js';
 
 const login = ()=>{

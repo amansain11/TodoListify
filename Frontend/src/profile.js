@@ -2,12 +2,12 @@ import '../styles/modern-normalize.css';
 import '../styles/style.css';
 import '../styles/components/header.css';
 import '../styles/components/profile-container.css';
-import '../styles/components/error.css';
+import '../styles/components/todolistify_error.css';
 
 import authUser from './utils/authenticate-user.js';
 import getUserDetails from './utils/getUserDetails.js';
 import logout from './utils/logout.js';
-import displayError from './utils/error.js';
+import displayError from './utils/todolistify_error.js';
 import loading from './utils/loading.js';
 import refreshAccessToken from './utils/refresh-access-token.js';
 

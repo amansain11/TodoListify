@@ -3,7 +3,7 @@ import "../styles/style.css";
 import "../styles/components/header.css";
 import "../styles/components/empty-content-box.css";
 import "../styles/components/todo-container.css";
-import "../styles/components/error.css";
+import "../styles/components/todolistify_error.css";
 
 import hamburger from "./utils/hamburger.js";
 import refreshAccessToken from "./utils/refresh-access-token.js";
@@ -13,7 +13,7 @@ import removeTodo from "./utils/removetodo.js";
 import checkbox from "./utils/checkbox.js";
 import getAllPendingTodos from "./utils/getAllPendingTodos.js";
 import getAllCompletedTodos from "./utils/getAllCompletedTodos.js";
-import displayError from "./utils/error.js";
+import displayError from "./utils/todolistify_error.js";
 import authUser from "./utils/authenticate-user.js";
 import loading from "./utils/loading.js";
 

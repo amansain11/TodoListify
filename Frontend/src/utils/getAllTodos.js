@@ -1,4 +1,4 @@
-import displayError from "./error.js";
+import displayError from "./todolistify_error.js";
 
 const getAllTodos = async (page, limit)=>{
     const url = `${import.meta.env.VITE_BACKEND_URL}/api/v1/todos/get-all-todos?page=${page}&limit=${limit}`;
