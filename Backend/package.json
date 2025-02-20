@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "nodemon src/index.js",
+    "build": "npm install --prefix ./Frontend && npm run build --prefix ./Frontend && npm install",
     "start": "node src/index.js"
   },
   "keywords": [],
