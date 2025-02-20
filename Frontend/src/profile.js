@@ -96,7 +96,7 @@ const updateUserDetails = ()=>{
 
         loadingParent.appendChild(loadingChild)
 
-        const url = `${import.meta.env.VITE_BACKEND_URL}/api/v1/users/update-account-details`;
+        const url = `/api/v1/users/update-account-details`;
 
         const formData = new FormData(userDetailsForm)
 
@@ -158,7 +158,7 @@ const changePassword = ()=>{
 
         loadingParent.appendChild(loadingChild)
 
-        const url = `${import.meta.env.VITE_BACKEND_URL}/api/v1/users/change-password`;
+        const url = `/api/v1/users/change-password`;
 
         const formData = new FormData(passwordForm)
 

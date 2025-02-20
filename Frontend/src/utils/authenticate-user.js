@@ -1,5 +1,5 @@
 const authUser = async()=>{
-    const url = `${import.meta.env.VITE_BACKEND_URL}/api/v1/users/verify-access-token`;
+    const url = `/api/v1/users/verify-access-token`;
 
     try {
         const response = await fetch(url,{

@@ -16,7 +16,7 @@ const login = ()=>{
 
         loadingParent.appendChild(loadingChild)
 
-        const url = `${import.meta.env.VITE_BACKEND_URL}/api/v1/users/login`;
+        const url = `/api/v1/users/login`;
 
         const formData = new FormData(form)
 

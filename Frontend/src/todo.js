@@ -338,7 +338,7 @@ const addTodo = () => {
 
     loadingParent.appendChild(loadingChild)
 
-    const url = `${import.meta.env.VITE_BACKEND_URL}/api/v1/todos/add-todo`;
+    const url = `/api/v1/todos/add-todo`;
 
     const formData = new FormData(form);
 
@@ -474,7 +474,7 @@ const editTodoHandler = () => {
 
         loadingParent.appendChild(loadingChild)
 
-        const url = `${import.meta.env.VITE_BACKEND_URL}/api/v1/todos/update-todo/${todoId}`;
+        const url = `/api/v1/todos/update-todo/${todoId}`;
 
         const formData = new FormData(form)
 

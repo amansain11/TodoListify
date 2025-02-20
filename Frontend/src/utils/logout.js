@@ -1,7 +1,7 @@
 import displayError from "./todolistify_error.js";
 
 const logout = async()=>{
-    const url = `${import.meta.env.VITE_BACKEND_URL}/api/v1/users/logout`
+    const url = `/api/v1/users/logout`
 
     await fetch(url,{
         method: 'POST',
