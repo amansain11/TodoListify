@@ -1,0 +1,292 @@
+.container{
+    width: 100vw;
+    height: 100vh;
+    background-color: #121212;
+    display: flex;
+    justify-content: center;
+}
+
+.desktop-left, .desktop-right{
+    display: none;
+}
+
+.middle{
+    margin: 38px 0;
+    padding: 0 10px;
+    width: 320px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.middle .logo{
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    width: 180px;
+    border-bottom: 1px solid white;
+    padding: 8px 0;
+}
+
+.middle .title{
+    text-align: center;
+    font-size: 25px;
+    width: 15ch;
+    margin-top: 10px;
+    letter-spacing: 1px;
+}
+
+.middle .subtitle{
+    text-align: center;
+    width: 100%;
+    font-size: 18px;
+}
+
+.review span{
+    color: gold;
+}
+
+.box{
+    gap: 5px;
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px 0 ;
+}
+
+.box p{
+    width: 12ch;
+}
+
+.btn{
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+#Login-btn:hover{
+    color: rgb(34 197 94);
+    border-color: rgb(34 197 94);
+}
+
+#Register-btn:hover{
+    color: #ff1d8d;
+    border-color: #ff1d8d;
+}
+
+.ruler{
+    width: 100%;
+    background-color: silver;
+    height: .5px;
+}
+
+footer{
+    color: white;
+    background-color: #121212;
+    width: 100vw;
+    text-align: center;
+    padding: 10px 0;
+    font-size: 12px;
+}
+
+/* sm */
+@media (min-width: 425px){
+    .middle{
+        margin: 35px 0;
+        width: 425px;
+        gap: 10px;
+    }
+
+    .middle .logo{
+        font-size: 25px;
+        width: 190px;
+    }
+
+    .middle .title{
+        font-size: 28px;
+        margin-top: 12px;
+    }
+
+    .review{
+        font-size: 18px;
+    }
+
+    .box{
+        gap: 8px;
+        margin: 23px 0 ;
+    }
+
+    .box p{
+        font-size: 18px;
+    }    
+
+    .btn{
+        font-size: 18px;
+    }
+
+    footer{
+        padding: 15px 0;
+        font-size: 13px;
+    }
+}
+
+/* md */
+@media (min-width: 625px){
+    .middle{
+        width: 625px;
+    }
+
+    .middle .logo{
+        font-size: 28px;
+        width: 220px;
+    }
+
+    .middle .title{
+        font-size: 30px;
+    }
+
+    .middle .subtitle{
+        font-size: 21px;
+    }
+
+    .box{
+        margin: 30px 0 ;
+    }
+
+    .box p{
+        font-size: 20px;
+    }    
+
+    .btn{
+        font-size: 19px;
+    }
+
+    footer{
+        padding: 20px 0;
+        font-size: 13px;
+    }
+}
+
+/* lg */
+@media (min-width: 824px){
+    .middle{
+        margin: 45px 0;
+        width: 824px;
+        gap: 15px;
+    }
+
+    .middle .logo{
+        font-size: 32px;
+        width: 250px;
+    }
+
+    .middle .title{
+        font-size: 38px;
+        margin-top: 25px;
+    }
+
+    .middle .subtitle{
+        width: 75%;
+    }
+
+    .review{
+        font-size: 20px;
+    }
+
+    .box{
+        gap: 10px;
+        margin: 40px 0 ;
+    }
+
+    .box p{
+        font-size: 22px;
+    }    
+
+    .btn{
+        font-size: 20px;
+    }
+
+    footer{
+        padding: 22px 0;
+        font-size: 15px;
+    }
+}
+
+/* xl */
+@media (min-width: 1024px){
+    .container{
+        height: 100vh;
+    }    
+    .desktop-left{
+        display: flex;
+        color: white;
+        background: url('/pexels-oleksii-fedorenko-279243790-13000131.jpg');
+        background-size: cover;
+        background-position: center;
+        flex: 1;
+        align-items: center;
+        justify-content: center;
+    } 
+    .desktop-right{
+        display: flex;
+        color: white;
+        background: url('/pexels-jenkin-shen-12165130-20830221.jpg');
+        background-size: cover;
+        background-position: center;
+        flex: 1;
+        align-items: center;
+        justify-content: center;
+    } 
+    .mobile-ruler{
+        display: none;
+    }
+
+    .user-box{
+        display: flex;
+        gap: 150px;
+    }
+
+    .middle{
+        padding: 30px 10px;
+        gap: 20px;
+    }
+
+    .middle .logo{
+        font-size: 32px;
+        width: 270px;
+    }
+
+    .middle .title{
+        margin-top: 45px;
+    }
+
+    .middle .subtitle{
+        font-size: 22px;
+        width: 75%;
+    }
+
+    .review{
+        margin-top: 10px;
+        font-size: 22px;
+    }
+
+    .box{
+        gap: 10px;
+    }
+
+    .box p{
+        font-size: 30px;
+    }    
+
+    .btn{
+        font-size: 23px;
+    }
+}
+
+/* 2xl */
+/* @media (min-width: 1425px){
+   
+} */

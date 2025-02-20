@@ -1,0 +1,195 @@
+.container{
+    color: white;
+    padding: 75px 12px 20px 12px;
+    height: 100vh;
+}
+
+.profile-container{
+    height: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 40px;
+    padding: 30px 15px;
+    border: 1px solid #374151;
+}
+
+.profile-content-box{
+    width: 100%;
+}
+
+.title-bar{
+    display: flex;
+    justify-content: space-between;
+    padding: 0 5px;
+    align-items: center;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.title-bar button{
+    align-items: center;
+    justify-content: center;
+    padding: 5px 8px;
+    font-size: 12px;
+    width: 58px;
+    gap: 2px;
+    font-weight: bold;
+}
+
+.title-bar button span{
+    line-height: unset;
+}
+
+.edit-btn svg{
+    height: max-content;
+    width: 13px;
+}
+
+.edit-btn{
+    display: flex;
+    font-weight: normal;
+    background-color: var(--edt-btn);
+}
+
+.edit-btn:hover{
+    background-color: var(--edt-hv-btn);
+}
+
+.edit-btn:active{
+    background-color: var(--edt-act-btn);
+}
+
+.save-btn{
+    display: none;
+    color: black;
+}
+
+.save-btn svg{
+    height: max-content;
+    width: 13px;
+}
+
+.save-btn{
+    background-color: var(--grn-btn);
+}
+
+.save-btn:hover{
+    background-color: var(--grn-hv-btn);
+}
+
+.save-btn:active{
+    background-color: var(--grn-act-btn);
+}
+
+.field-box{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.fields{
+    display: flex;
+    flex-direction: column;
+    padding: 10px 10px;
+    border: 1px solid white;
+}
+
+.fields span{
+    font-size: 13px;
+}
+
+.fields input{
+    background: none;
+    outline: none;
+    border: none;
+    color: white;
+    font-weight: bold;
+    caret-color: var(--accent);
+}
+
+.fields input::placeholder{
+    color: #64748b;
+    font-weight: normal;
+    font-size: smaller;
+}
+
+.newPassword-box{
+    display: none;
+}
+
+.footer-box{
+    width: 100%;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: end;
+}
+
+.logout-link-box{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+}
+
+#logout-button{
+    text-decoration: none;
+    color: var(--accent);
+    text-wrap: nowrap;
+    font-weight: 500;
+    letter-spacing: 1px;
+}
+
+.logout-box-ruler{
+    height: 1px;
+    width: 100%;
+    background-color: #374151;
+}
+
+
+/* md */
+@media (min-width: 725px){
+    .container{
+        padding: 100px 40px 30px 40px;
+    }
+
+    .profile-container{
+        padding: 30px 30px;
+        gap: 50px;
+        margin: 0 auto;
+        max-width: 1100px;
+    }
+
+    .title-bar{
+        padding: 0 15px;
+    }
+
+    .title-text{
+        font-size: large;
+    }
+    
+    .field-box{
+        flex-direction: row;
+        border: 1px solid white;
+    }
+
+    .fields{
+        width: 100%;
+        padding: 20px;
+        border: none;
+    }
+
+    .fields span{
+        font-size: 15px;
+    }
+
+    .fields input{
+        font-size: large;
+    }
+
+    #logout-button{
+        font-size: 17px;
+    }
+}

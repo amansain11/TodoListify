@@ -1,0 +1,243 @@
+.desktop-header{
+    display: none;
+    font-size: 18px;
+    font-weight: 500;
+    color: white;
+    letter-spacing: 2px;
+    position: fixed;
+    width: 100%;
+    background-color: #121212;
+    border-bottom: 1px solid #374151;
+}
+
+.desktop-header a{
+    color: white;
+    text-decoration: none;
+}
+
+.desktop-header .current-page-title-box{
+    padding: 18px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.desktop-header .logo-box{
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-left: 1px solid #374151;
+    border-right: 1px solid #374151;
+    font-size: 20px;
+}
+
+.desktop-header .logo-box span{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+}
+
+.desktop-header .logo-box span > div{
+    position: absolute;
+    top: -6px;
+    right: -45px;
+}
+
+.desktop-header .desktop-user-profile{
+    padding: 18px 13px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.desktop-header .desktop-user-profile a{
+    color: var(--accent);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    justify-content: center;
+}
+
+.desktop-user-profile a svg{
+    width: 25px;
+    height: 25px;
+}
+
+.desktop-user-profile #exit-icon{
+    width: 32px;
+    height: 32px;
+}
+
+.icon-fill{
+    fill: var(--accent);
+}
+
+.mobile-header{
+    display: flex;
+    position: fixed;
+    width: 100%;
+    background-color: #121212;
+    border-bottom: 1px solid #374151;
+}
+
+.content-box{
+    flex: 1;
+    padding: 15px 12px; 
+    font-weight: 500;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    letter-spacing: 1px;
+}
+
+.content-box span{
+    color: white;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.content-box span > div{
+    width: 35px;
+}
+
+#content-box-items{
+    display: none;
+    width: 100%;
+    gap: 20px;
+}
+
+.move-left{
+    transform: translateX(100%);
+    animation: moveleft 0.3s linear forwards;
+}
+
+.move-right{
+    transform: translateX(0);
+    animation: moveright 0.3s linear forwards;
+}
+
+@keyframes moveleft {
+    100%{
+        transform: translateX(0);
+    }
+}
+
+@keyframes moveright {
+    100%{
+        transform: translateX(130%);
+    }
+}
+
+#content-box-items a{
+    text-decoration: none;
+    color: white;
+    font-size: 15px;
+    text-align: center;
+}
+
+#content-box-items a span{
+    font-size: 15px;
+    text-align: center;
+}
+
+.underline{
+    border-bottom: 1px solid white;
+}
+
+#content-box-items .mobile-user-profile a{
+    color: var(--accent);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.mobile-user-profile a svg{
+    width: 22px;
+    height: 22px;
+}
+
+.mobile-user-profile a span{
+    color: var(--accent);
+}
+
+.hamburger-box{
+    padding: 12px 4px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    background-color: #121212;
+    z-index: 1000;
+}
+
+.hamburger-box svg{
+    cursor: pointer;
+    width: 35px;
+    height: 35px;
+    transition: all .2s ease-in-out;
+}
+
+.active-hamburger{
+        transform: rotate(90deg);
+}
+
+/* xs */
+@media (min-width: 320px){
+    #content-box-items a{
+        font-size: 17px; 
+        gap: 2px;
+    }
+    #content-box-items a span{
+        font-size: 17px; 
+    }
+}
+
+/* sm */
+@media (min-width: 425px){
+    #content-box-items a{
+        margin: 0px 16px; 
+        font-size: 18px; 
+    }
+    #content-box-items a span{
+        font-size: 18px; 
+    }
+    .hamburger-box{
+        padding: 15px;
+    }
+}
+
+/* md */
+@media (min-width: 625px){
+    #content-box-items a{
+        margin: 0px 46px;
+    } 
+}
+
+/* lg */
+@media (min-width: 724px){
+    .desktop-header{
+        display: flex;
+    }
+    
+    .mobile-header{
+        display: none;
+    }
+}
+
+/* xl */
+/* @media (min-width: 1024px){
+} */
+
+/* 2xl */
+@media (min-width: 1425px){
+    .desktop-header .current-page-title-box{
+        padding: 18px 30px;
+    }
+
+    .desktop-header .desktop-user-profile{
+        padding: 18px 30px;
+    }
+}

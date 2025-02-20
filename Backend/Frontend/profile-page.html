@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TodoListify | Profile</title>
+  </head>
+  <body>
+    <header>
+      <div class="desktop-header">
+        <div class="current-page-title-box">
+          <span class="todo-page">Profile</span>
+        </div>
+        <div class="logo-box"><span id="logo-box-title">TodoListify</span></div>
+        <div class="desktop-user-profile">
+          <a href="/todo-page.html">
+            <svg
+              id="exit-icon"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              class="size-6 icon-fill"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M13.28 11.47a.75.75 0 0 1 0 1.06l-7.5 7.5a.75.75 0 0 1-1.06-1.06L11.69 12 4.72 5.03a.75.75 0 0 1 1.06-1.06l7.5 7.5Z"
+                clip-rule="evenodd"
+              />
+              <path
+                fill-rule="evenodd"
+                d="M19.28 11.47a.75.75 0 0 1 0 1.06l-7.5 7.5a.75.75 0 1 1-1.06-1.06L17.69 12l-6.97-6.97a.75.75 0 0 1 1.06-1.06l7.5 7.5Z"
+                clip-rule="evenodd"
+              />
+            </svg>
+          </a>
+        </div>
+      </div>
+      <div class="mobile-header">
+        <div class="content-box">
+          <span id="content-box-title">TodoListify</span>
+        </div>
+        <div class="hamburger-box">
+          <a href="/todo-page.html">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              class="size-6, icon-fill"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M13.28 11.47a.75.75 0 0 1 0 1.06l-7.5 7.5a.75.75 0 0 1-1.06-1.06L11.69 12 4.72 5.03a.75.75 0 0 1 1.06-1.06l7.5 7.5Z"
+                clip-rule="evenodd"
+              />
+              <path
+                fill-rule="evenodd"
+                d="M19.28 11.47a.75.75 0 0 1 0 1.06l-7.5 7.5a.75.75 0 1 1-1.06-1.06L17.69 12l-6.97-6.97a.75.75 0 0 1 1.06-1.06l7.5 7.5Z"
+                clip-rule="evenodd"
+              />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </header>
+    <div class="container">
+      <div class="profile-container">
+        <form id="update-details-form" class="personal-info-box profile-content-box">
+          <div class="title-bar">
+            <span class="title-text">Personal Information</span>
+            <button id="info-edit-btn" class="edit-btn">
+              <span>Edit</span>
+              <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="transparent"
+                    stroke="#ffffff"
+                    stroke-width="1.5907322640547643"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="feather feather-edit-3"
+                  >
+                    <path d="M12 20h9"></path>
+                    <path
+                      d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"
+                    ></path>
+                  </svg>
+            </button>
+            <button type="submit" id="info-save-btn" class="save-btn">save</button>
+          </div>
+          <div class="field-box">
+            <div class="username-box fields">
+              <span>Username</span>
+              <input type="text" id="username" name="username" placeholder="Enter new username.." autocomplete="username" required>
+            </div>
+            <div class="email-box fields">
+              <span>Email</span>
+              <input type="email" id="email" name="email" placeholder="Enter new email.." autocomplete="email" required>
+            </div>
+          </div>
+        </form>
+        <form id="change-password-form" class="user-credential-box profile-content-box">
+          <div class="title-bar">
+            <span  class="title-text">User Credentials</span>
+            <button id="password-edit-btn" class="edit-btn">
+              <span>Edit</span>
+              <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="transparent"
+              stroke="#ffffff"
+              stroke-width="1.5907322640547643"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="feather feather-edit-3"
+              >
+              <path d="M12 20h9"></path>
+              <path
+                d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"
+              ></path>
+            </svg>
+            </button>
+            <button type="submit" id="password-save-btn" class="save-btn">save</button>
+          </div>
+          <div class="field-box">
+            <div class="oldPassword-box fields">
+              <span id="oldPassword-field-title">Password</span>
+              <input type="password" id="oldPassword" name="oldPassword" placeholder="Enter old password.." autocomplete="current-password" required>
+            </div>
+            <div class="newPassword-box fields">
+              <span>New Password</span>
+              <input type="password" id="newPassword" name="newPassword" placeholder="Enter new password.." autocomplete="new-password" required>
+            </div>
+          </div>
+        </form>
+        <div class="footer-box">
+          <div class="logout-link-box">
+            <div class="logout-box-ruler"></div>
+            <a id="logout-button" href="">Log Out</a>
+            <div class="logout-box-ruler"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script type="module" src="/src/profile.js"></script>
+  </body>
+</html>

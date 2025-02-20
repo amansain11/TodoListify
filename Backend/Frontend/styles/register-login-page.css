@@ -1,0 +1,132 @@
+.container{
+    width: 100%;
+    height: 100%;
+    background-color: #121212;
+    display: flex;
+}
+
+.section{
+    padding: 0 20px;
+}
+
+.form-container{
+    flex: 1;
+    background-color: #121212;
+    color: white;
+}
+
+.image-container{
+    display: none;
+}
+
+.form-container-header{
+    padding-top: 15px;
+    padding-bottom: 15px;
+    font-size: 15px;
+    font-weight: 500;
+    width: 100%;
+    position: fixed;
+    background: #121212 ;
+}
+
+.form-container-section{
+    padding-top: 80px;
+    padding-bottom: 100px;
+}
+
+.title-box{
+    line-height: 1;
+    margin-bottom: 40px;
+}
+
+.title-box .title{
+    font-size: 45px;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.title-box .sub-title{
+    font-size: 11px;
+    color: #94a3b8;
+}
+
+.form-box label{
+    font-size: 12px;
+    color: #e2e8f0;
+}
+
+.form-box input{
+    background: black;
+    width: 100%;
+    border: 1px solid white;
+    padding: 1em;
+    margin-bottom: 13px;
+    color: white;
+    font-size: 18px;
+
+}
+
+.form-box input::placeholder{
+    font-size: 15px;
+    color: #6b7280;
+}
+
+.form-box button{
+    transition: all .150s ease-in-out;
+    font-weight: 800;
+    font-size: 14px;
+    padding: 1em;
+    width: 100%;
+    background-color: var(--submit-btn);
+    box-shadow: 5px 5px 0px 0px #4f4e4e;
+    color: black;
+    margin: 15px 0;
+}
+
+.form-box button:active{
+    transform: translateX(5px) translateY(5px);
+    box-shadow: 0px 0px 0px 0px #4f4e4e;
+}
+
+.redirect{
+    margin: 45px 0;
+    font-size: 12px;
+    font-weight: 200;
+}
+
+.redirect a{
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+}
+
+.redirect a:hover{
+    text-decoration: underline;
+}
+
+/* lg */
+@media (min-width: 725px){
+    .image-container{
+        display: flex;
+        flex: 1;
+        background-color: #b72323;
+        position: relative;
+    }
+    .image-container .image{
+        position: fixed;
+        background: url('/pexels-photo-1144275.jpeg');
+        background-size: cover;
+        background-position: center;
+        width: 50%;
+        height: 140%;
+    }
+}
+
+@media (min-width: 1024px){
+    .section{
+        padding-left: 40px;
+        padding-right: 40px;
+    }
+}

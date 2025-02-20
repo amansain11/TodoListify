@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TodoListify | Todos</title>
+  </head>
+
+  <body>
+    <header>
+      <div class="desktop-header">
+        <div class="current-page-title-box">
+          <span class="todo-page">Todos</span>
+        </div>
+        <div class="logo-box"><span id="logo-box-title">TodoListify</span></div>
+        <div class="desktop-user-profile">
+        </div>
+      </div>
+      <div class="mobile-header">
+        <div class="content-box">
+          <span id="content-box-title">TodoListify</span>
+          <div id="content-box-items">
+            <a class="todo-page underline">Todos</a>
+            <div class="mobile-user-profile">
+            </div>
+          </div>
+        </div>
+        <div class="hamburger-box">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="white"
+            class="size-6"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+            />
+          </svg>
+        </div>
+      </div>
+    </header>
+    <div class="container">
+      <div class="empty-content-box">
+        <div class="empty-icon">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="white"
+            aria-hidden="true"
+            class="h-20 w-20 text-white md:h-28 md:w-28"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M2.25 13.5h3.86a2.25 2.25 0 012.012 1.244l.256.512a2.25 2.25 0 002.013 1.244h3.218a2.25 2.25 0 002.013-1.244l.256-.512a2.25 2.25 0 012.013-1.244h3.859m-19.5.338V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18v-4.162c0-.224-.034-.447-.1-.661L19.24 5.338a2.25 2.25 0 00-2.15-1.588H6.911a2.25 2.25 0 00-2.15 1.588L2.35 13.177a2.25 2.25 0 00-.1.661z"
+            ></path>
+          </svg>
+        </div>
+        <div class="empty-text-box">
+          <span class="empty-text-title">No todos found?</span>
+          <p class="empty-text-subtitle">
+            No todo has been added till now. Click the below button to create a
+            new task.
+          </p>
+        </div>
+        <button id="add-new-todo">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+            aria-hidden="true"
+            class="mr-2 h-5 w-5 text-[#121212]">
+            <path
+              fill-rule="evenodd"
+              d="M10 18a8 8 0 100-16 8 8 0 000 16zm.75-11.25a.75.75 0 00-1.5 0v2.5h-2.5a.75.75 0 000 1.5h2.5v2.5a.75.75 0 001.5 0v-2.5h2.5a.75.75 0 000-1.5h-2.5v-2.5z"
+              clip-rule="evenodd"
+            ></path>
+          </svg>
+          Add a new todo
+        </button>
+      </div>
+      <div class="navigation-button-box">
+        <button id="all-todos-button" class="navigation-button">
+          All
+        </button>
+        <button id="pending-todos-button" class="navigation-button">
+          Pending
+        </button>
+        <button id="completed-todos-button" class="navigation-button">
+          completed
+        </button>
+      </div>
+      <ul class="todos-box">
+        <form class="add-todo-box">
+          <input type="text" id="text-box" name="todo" placeholder="Type to add a new todo...">
+          <button id="icon-box" type="submit">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+              fill="black"
+              aria-hidden="true"
+              class="h-8 w-8">
+              <path
+                fill-rule="evenodd"
+                d="M10 18a8 8 0 100-16 8 8 0 000 16zm.75-11.25a.75.75 0 00-1.5 0v2.5h-2.5a.75.75 0 000 1.5h2.5v2.5a.75.75 0 001.5 0v-2.5h2.5a.75.75 0 000-1.5h-2.5v-2.5z"
+                clip-rule="evenodd"></path>
+            </svg>
+          </button>
+        </form>
+        <div id="todo-box-wrapper" style="width: 100%"></div>
+      </ul>
+      <div class="footer-box">
+        <div class="pagination-link-box">
+          <div class="pagination-box-ruler"></div>
+          <button id="prev-button" >Prev</button>
+          <div class="divider"></div>
+          <button id="next-button" >Next</button>
+          <div class="pagination-box-ruler"></div>
+        </div>
+      </div>
+    </div>
+    <script type="module" src="/src/todo.js"></script>
+  </body>
+</html>

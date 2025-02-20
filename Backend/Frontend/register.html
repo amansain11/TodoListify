@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TodoListify | Register</title>
+  </head>
+  <body>
+    <div class="container">
+        <div class="form-container">
+            <header class="form-container-header section">TodoListify</header>
+            <div class="form-container-section section">
+                <div class="title-box">
+                    <div class="title">Register</div>
+                    <span class="sub-title">Before we Start, please create your account</span>
+                </div>
+                <div class="form-box">
+                    <form id="register-form">
+                        <label for="username">Username</label><br>
+                        <input type="text" id="username" name="username" placeholder="Enter a username..." autocomplete="username" required>
+                        <!-- <br><br> -->
+                        <label for="email">Email</label><br>
+                        <input type="email" name="email" id="email" placeholder="Enter a email..." autocomplete="email" required>
+                        <!-- <br><br> -->
+                        <label for="password">Password</label><br>
+                        <input type="password" name="password" id="password" placeholder="Enter a password..." autocomplete="new-password" required>
+                        <!-- <br><br> -->
+                        <button type="submit">Create Account</button>
+                    </form>
+                </div>
+                <div class="redirect">Already registered? <a href="login.html">Sign in to your account</a></div>
+            </div>
+        </div>
+        <div class="image-container">
+            <div class="image"></div>
+        </div>
+    </div>
+    <script type="module" src="/src/register.js"></script>
+  </body>
+</html>

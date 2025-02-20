@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TodoListify | Login</title>
+  </head>
+  <body>
+    <div class="container">
+        <div class="form-container">
+            <header class="form-container-header section">TodoListify</header>
+            <div class="form-container-section section">
+                <div class="title-box">
+                    <div class="title">Login</div>
+                    <span class="sub-title">Before we Start, please log into your account</span>
+                </div>
+                <div class="form-box">
+                    <form id="login-form">
+                        <label for="email">Email</label><br>
+                        <input type="email" id="email" name="email" placeholder="Enter a email..." autocomplete="email" required>
+                        <label for="password">Password</label><br>
+                        <input type="password" name="password" id="password" placeholder="Enter a password..." autocomplete="current-password" required>
+                        <button type="submit">Log in</button>
+                    </form>
+                </div>
+                <div class="redirect">Dont't have an account? <a href="register.html">Create an account</a></div>
+            </div>
+        </div>
+        <div class="image-container">
+            <div class="image"></div>
+        </div>
+    </div>
+    <script type="module" src="/src/login.js"></script>
+  </body>
+</html>
