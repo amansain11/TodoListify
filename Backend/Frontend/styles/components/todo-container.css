@@ -58,6 +58,7 @@
     color: white;
     outline: none;
     flex: 1;
+    width: 100%;
 }
 
 .add-todo-box input::placeholder{
@@ -116,6 +117,7 @@
 
 #title-text{
     cursor: pointer;
+    white-space: nowrap;
 }
 
 #full-title-text{
@@ -124,13 +126,13 @@
     border: 1px solid gray;
     padding: 3px;
     font-size: 11px;
-    text-align: center;
-    width: fit-content;
+    max-width: 73%;
     position: absolute;
     transform: translate(2%, 10%);
     pointer-events: none;
     opacity: 0;
     transition: opacity 0.1s ease-in-out;
+    white-space: normal;
 }
 
 .todo-title:hover{
@@ -169,8 +171,8 @@
 
 .todo-content-right #date{
     border: 1px solid white;
-    font-size: 12px;
-    padding: 3px 8px;
+    font-size: 10px;
+    padding: 3px 4px;
 }
 
 .todo-content-right #remove{
@@ -214,6 +216,8 @@
     width: 100%;
     display: flex;
     justify-content: space-between;
+    gap: 5px;
+    overflow: hidden;
 }
 
 #edit-input{
@@ -223,6 +227,7 @@
     flex: 1;
     background: none;
     border: 0;
+    width: 100%;
 }
 
 .save-btn{
@@ -287,7 +292,11 @@
 @media (min-width: 320px){
     .todo-title{
         width: 22vw;
-    }    
+    }  
+    .todo-content-right #date{
+        font-size: 12px;
+        padding: 3px 7px;
+    }  
 }
 
 /* sm */
