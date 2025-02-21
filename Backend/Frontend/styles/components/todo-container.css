@@ -133,6 +133,7 @@
     opacity: 0;
     transition: opacity 0.1s ease-in-out;
     white-space: normal;
+    word-wrap: break-word;
 }
 
 .todo-title:hover{
@@ -352,10 +353,6 @@
     .todo-content-left .todo-title{
         font-size: 16px;
     }
-
-    .todo-title{
-        width: auto;
-    }   
     
     #todo-checkbox{
         width: 23px;
@@ -394,4 +391,8 @@
         max-width: 1100px;
         margin: 0 auto;
     }
+
+    .todo-title{
+        width: auto;
+    }   
 }
