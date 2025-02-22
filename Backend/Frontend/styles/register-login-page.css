@@ -29,6 +29,11 @@
     background: #121212 ;
 }
 
+.form-container-header a{
+    color: white;
+    text-decoration: none;
+}
+
 .form-container-section{
     padding-top: 80px;
     padding-bottom: 100px;
